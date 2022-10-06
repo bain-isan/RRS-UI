@@ -1,0 +1,36 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../../assets/images/login-bg.jpg") ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.spacing{
+    margin: 1.5rem;
+}
+
+.alert-spacing{
+    margin: 1rem;
+}
+
+.card-size{
+    width: 400px;
+    position: absolute;
+    left: 4rem;
+    top: 4rem;
+}
+
+#register{
+    text-decoration: none;
+}
+
+@media screen and (max-width: 550px) {
+    .card-size{
+        width: 300px;
+        position: absolute;
+        left: 3rem;
+        top: 3rem;
+    }
+}

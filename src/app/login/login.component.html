@@ -1,0 +1,42 @@
+<div class="main">
+
+  
+
+  
+    
+  
+  
+  <div class="card card-size">
+    <div class="alert {{classMsg}} alert-spacing" role="alert">{{message}}</div>
+    <div >
+      <h2 class="text-center spacing">Login</h2>
+      <form #form='ngForm' (ngSubmit)="onSubmit()" novalidate>
+        <!-- UserId input -->
+        <div class="form-group spacing">
+            <label class="form-label" for="userId" >UserId </label>
+            <input type="text" class="form-control" name="UserId"  id="userId" required [(ngModel)] = "login.UserId" #user="ngModel" [class.is-invalid]='user.invalid && user.touched' placeholder="Eg. 123456"/>
+            <small class="text-danger" [class.d-none]="user.valid || user.untouched">UserId Field is Mandatory</small>
+        </div>
+        
+        
+        <!-- Password input -->
+        <div class="form-group spacing">
+            <label for="loginPassword">Password</label>
+            <input type="password" class="form-control" name="Password" id="loginPassword" required [(ngModel)] = "login.Password" #pass="ngModel" [class.is-invalid]='pass.invalid && pass.touched' placeholder="Eg. ******"/>
+            <small class="text-danger" [class.d-none]="pass.valid || pass.untouched">Password Field is Mandatory</small>
+        </div>
+  
+        <!-- Submit button -->
+        <div class="form-group spacing">
+          <button type="submit" class="btn btn-primary  form-control" [disabled]="form.invalid || form.untouched">Sign in</button>
+        </div>
+        
+        <!-- Register buttons -->
+        <div>
+          <p class="text-center spacing">Not a member? <a href="#!" id="register">Register</a></p>
+        </div>
+      </form>
+    
+    </div>
+  </div>
+</div>
