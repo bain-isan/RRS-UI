@@ -19,6 +19,7 @@ import { TicketComponent } from './ticket/ticket.component';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { AddTrainComponent } from './add-train/add-train.component';
 import { UpdateTrainComponent } from './update-train/update-train.component';
+import { TrainListComponent } from './train-list/train-list.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { UpdateTrainComponent } from './update-train/update-train.component';
     TicketComponent,
     ViewTicketComponent,
     AddTrainComponent,
-    UpdateTrainComponent
+    UpdateTrainComponent,
+    TrainListComponent
   ],
   imports: [
     BrowserModule,

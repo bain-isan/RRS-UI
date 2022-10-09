@@ -12,6 +12,6 @@ export class TrainListService {
   constructor(private _http:HttpClient, private _router:Router) { }
 
   public getAllTrains(){
-    return this._http.get<TrainDtoPut>(this.baseUrl);
+    return this._http.get<TrainDtoPut[]>(this.baseUrl);
   }
 }

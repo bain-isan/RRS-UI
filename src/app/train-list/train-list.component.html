@@ -1,0 +1,38 @@
+<div class="data sizing">
+    <div class="table table-bordered table-striped table-hover">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">TainNo</th>
+                    <th scope="col">Train Name</th>
+                    <th scope="col">Source Station</th>
+                    <th scope="col">Destination Station</th>
+                    <th scope="col">Source Departure Time</th>
+                    <th scope="col">Destination Arrival Time</th>
+                    <th scope="col">Total Seats</th>
+                    <th scope="col">General Seat Available</th>
+                    <th scope="col">Ladies Seat Available</th>
+                    <th scope="col">Fare(Rs)</th>
+                    <th scope="col">Book</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let result of allTrains">
+                    <td>{{result.trainNo}}</td>
+                    <td>{{result.trainName}}</td>
+                    <td>{{result.sourceStation}}</td>
+                    <td>{{result.destinationStation}}</td>
+                    <td>{{result.sourceDepartureTime | date:'medium'}}</td>
+                    <td>{{result.destinationArrivalTime  | date:'medium'}}</td>
+                    <td>{{result.totalSeat}}</td>
+                    <td>{{result.availableGeneralSeat}}</td>
+                    <td>{{result.availableLadiesSeat}}</td>
+                    <td>{{result.seatFare}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-info text-white" (click)="onUpdate(result)">Update</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

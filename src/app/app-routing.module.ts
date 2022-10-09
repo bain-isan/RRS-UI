@@ -8,6 +8,8 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SearchTrainComponent } from './search-train/search-train.component';
 import { TicketComponent } from './ticket/ticket.component';
+import { TrainListComponent } from './train-list/train-list.component';
+import { UpdateTrainComponent } from './update-train/update-train.component';
 //import { TrainListComponent } from './train-list/train-list.component';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 
@@ -22,7 +24,8 @@ const routes: Routes = [
   {path:"Ticket/Search", component:TicketComponent},
   {path:"Ticket/Views", component:ViewTicketComponent},
   {path:"Train/Add", component:AddTrainComponent},
-  //{path:"Train/View", component:TrainListComponent}
+  {path:"Train/View", component:TrainListComponent},
+  {path:"Train/Update", component:UpdateTrainComponent}
 ];
 
 @NgModule({

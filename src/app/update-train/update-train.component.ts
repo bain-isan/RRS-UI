@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UpdateTrainService } from '../services/update-train.service';
 import { Stations } from '../shared/stations';
 import { Train } from '../shared/train';
@@ -18,9 +19,14 @@ export class UpdateTrainComponent implements OnInit {
   public train = new Train(this.num,'','','',this.num,this.num,this.num,this.num,this.num,this.num);
   public sourceDate:any;
 
-  constructor(private _service:UpdateTrainService) { }
+  constructor(private _service:UpdateTrainService, private _acRouter:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this._acRouter.queryParams.subscribe(
+      params => {
+        this.train = JSON.parse(params['data']);
+      }
+    )
   }
 
   onArrival(){
