@@ -28,4 +28,8 @@ export class TrainListComponent implements OnInit {
   onUpdate(result:TrainDtoPut){
     this._route.navigate(['Train/Update'], {queryParams: {data: JSON.stringify(result)}});
   }
+
+  onAddTrain(){
+    this._route.navigate(['Train/Add']);
+  }
 }
