@@ -1,0 +1,78 @@
+<div class="main">
+
+    <div class="card card-size ">
+        <div class="alert {{classMsg}} alert-spacing" role="alert">{{message}}</div>
+        <h1 class="text-center spacing">Register</h1>
+        <form #reg="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group spacing">
+                <label class="form-label" for="lname">Name:</label>
+                <input class="form-control" type="text" name="name" placeholder="Enter Name" required [(ngModel)]="register.Name" #name="ngModel"
+                pattern="[a-zA-Z ]*" [class.is-invalid]="name.invalid && name.touched">
+
+                <small class="text-danger" [class.d-none]="name.valid || name.untouched">Mandatory and Must be a valid Name</small>
+                
+            </div>
+            <div class="form-group spacing">
+                <label class="form-label" for="fname">Email:</label>
+                <input class="form-control" type="email" placeholder="Enter Email" name="email" id="email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  required
+                    [(ngModel)]="register.Email" #email="ngModel" [class.is-invalid]="email.invalid && email.touched">
+                    <small class="text-danger" [class.d-none]="email.valid || email.untouched">Mandatory and Must be a valid Email</small>
+            </div>
+            <div class="row spacing no-bootstrap-spacing">
+                <div class="col no-bootstrap-spacing ">
+                    <div class="form-group spacing-right">
+                        <label class="form-label" for="fname">Dob:</label>
+                        <input class="form-control" type="date" name="Dob" max="{{today}}"required [(ngModel)]="register.Dob" #dob="ngModel"
+                        [class.is-invalid]="dob.invalid && dob.touched">
+                        <small class="text-danger" [class.d-none]="dob.valid || dob.untouched">Mandatory and Must be a valid DoB</small>
+                    </div>
+                </div>
+                <div class="col no-bootstrap-spacing">
+                    <div class="form-group  spacing-left">
+                        <label class="form-label" for="standard-select">Gender</label>
+                        <div class="select">
+                            <select class="form-select" id="standard-select" name="Gender" required [(ngModel)]="register.Gender" 
+                            #gender="ngModel" [class.is-invalid]="gender.invalid && gender.touched">
+                                <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+                            </select>
+                            <small class="text-danger" [class.d-none]="gender.valid || gender.untouched">Mandatory and Must be Selected</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]$" -->
+            <div class="row no-bootstrap-spacing spacing ">
+                <div class="col no-bootstrap-spacing">
+                    <div class="form-group spacing-right">
+                        <label class="form-label" for="fname">Password:</label>
+                        <input class="form-control" type="Password" name="Password" placeholder="Enter Password" required [(ngModel)]="register.Password"
+                        #password="ngModel"  minlength="8"
+                        [class.is-invalid]="password.invalid && password.touched">
+                        <small class="text-danger" [class.d-none]="password.valid || password.untouched">Mandatory and Must be a valid Passowrd<br>
+                            <ul>
+                                <li>Minimum one: Capital Letter</li>
+                                <li>Minimum one: Small Letter</li>
+                                <li>Minimum one: Number</li>
+                                <li>Minimum one: Special Character(@,$,!,%,*,?,&)</li>
+                            </ul>
+                        </small>
+                    </div>
+                </div>
+                <div class="col no-bootstrap-spacing">
+                    <div class="form-group spacing-left">
+                        <label class="form-label" for="ConfirmPassword">ConfirmPassword:</label>
+                        <input class="form-control" type="Password" name="ConfirmPassword" placeholder="Re-Enter Password" required [(ngModel)]="register.ConformPassword"
+                        #confirm="ngModel" [class.is-invalid]="confirm.invalid && confirm.touched && register.Password === register.ConformPassword">
+                        <small class="text-danger" [class.d-none]="confirm.valid || confirm.untouched">Mandatory and Must be Matched with Password</small>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <div class="form-group">
+
+                <button type="submit" class="btn btn-primary btn-lg form-control spacing" [disabled]="reg.invalid || reg.untouched">Register</button>
+            </div>
+        </form>
+    </div>
+</div>

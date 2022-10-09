@@ -1,0 +1,123 @@
+<!--Train Details-->
+<div class="card card-sizing">
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col bold">Train Number:</div>
+                <div class="col">{{searchResult.trainNo}}</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col bold">Train Name:</div>
+                <div class="col">{{searchResult.trainName}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col bold">Source Station:</div>
+                <div class="col">{{searchResult.sourceStation}}</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col bold">Destination Station:</div>
+                <div class="col">{{searchResult.destinationStation}}</div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row">
+                <div class="col bold">Source Departure Time: </div>
+                <div class="col">{{searchResult.sourceDepartureTime | date:'medium'}}</div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col bold">Destination Arrival Time:</div>
+                <div class="col">{{searchResult.destinationArrivalTime | date:'medium'}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Reservation Form-->
+<form class="form-inline" #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-group card card-sizing">
+        <label for="quota">Quota</label>
+        <select type="email" name="quota" class="form-select" id="quota" required [(ngModel)]="reservation.QuotaName"
+            #quota="ngModel" [class.is-invalid]="quota.invalid && quota.touched" (change)="onQuotaChange()">
+            <option *ngFor="let quota of quotas" [value]="quota">{{quota}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="quota.valid || quota.untouched">Quota is
+            mandatory and Must be selected</small>
+    </div>
+
+
+    <div class="card  card-sizing">
+        <div *ngFor="let passenger of passengers; let i= index">
+            <div class="row spacing">
+                <div class="col">
+                    <label for="name">Name</label>
+                    <input type="text" name="name{{i}}" class="form-control" id="name"
+                        placeholder="Eg. FirstName MiddleName LastName" [(ngModel)]="passenger.Name" #name="ngModel"
+                        required pattern="[a-zA-Z ]*" [class.is-invalid]="name.invalid && name.touched"
+                        [disabled]="reservation.QuotaName == ''">
+                    <small class="text-danger" [class.d-none]="name.valid || name.untouched">Name is
+                        mandatory and Must be a valid Name</small>
+                </div>
+                <div class="col">
+                    <label for="phone">Phone</label>
+                    <input type="number" name="phone{{i}}" class="form-control" id="phone" placeholder="Eg. 123456789"
+                        required pattern="^[0-9]{10}$" [(ngModel)]="passenger.Phone" #phone="ngModel" required
+                        maxlength="10" minlength="10" [class.is-invalid]="phone.invalid && phone.touched"
+                        [disabled]="reservation.QuotaName == ''">
+                    <small class="text-danger" [class.d-none]="phone.valid || phone.untouched">Phone Number is
+                        mandatory
+                        and
+                        Must be valid 10 digits</small>
+                </div>
+
+            </div>
+            <div>
+                <div class="row spacing">
+                    <div class="col">
+                        <label for="gender">Gender</label>
+                        <select class="form-select" name="gender{{i}}" id="gender" required
+                            [(ngModel)]="passenger.Gender" #gender="ngModel" required
+                            [class.is-invalid]="gender.invalid && gender.touched"
+                            [disabled]="reservation.QuotaName == ''">
+                            <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+                        </select>
+                        <small class="text-danger" [class.d-none]="gender.valid || gender.untouched">Gender is
+                            mandatory
+                            and
+                            Must be selected</small>
+                    </div>
+                    <div class="col">
+                        <label for="age">Age</label>
+                        <input type="number" name="age{{i}}" class="form-control" id="age" placeholder="Eg. 22" required
+                            [(ngModel)]="passenger.Age" #age="ngModel" required
+                            [class.is-invalid]="age.invalid && age.touched" [disabled]="reservation.QuotaName == ''">
+                        <small class="text-danger" [class.d-none]="age.valid || age.untouched">Age is mandatory and
+                            Must be selected</small>
+                    </div>
+                    <div class="col" [class.d-none]="i == 0">
+                        <label>Remove</label>
+                        <button type="button" name="Remove{{i}}" class="form-control btn btn-danger"
+                            (click)="onRemovePassenger(i)">-Remove</button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <button type="button" name="Add" class="btn btn-info" (click)="onAddPassenger()"
+            [disabled]="reservation.QuotaName == ''">+Add Passenger</button>
+
+    </div>
+    <button type="submit" class="btn btn-primary form-control card-sizing"
+        [disabled]="form.invalid || form.untouched">Book Now</button>
+</form>

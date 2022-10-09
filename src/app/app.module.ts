@@ -8,11 +8,23 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { LoginComponent } from './login/login.component';
+import { ReservationComponent } from './reservation/reservation.component';
+import { PaymentComponent } from './payment/payment.component';
+import { SearchTrainComponent } from './search-train/search-train.component';
+import { RegisterComponent } from './register/register.component';
+import { SearchResultComponent } from './search-result/search-result.component';
+import { ReservationDto } from './shared/reservation-dto';
+import { Transaction } from './shared/transaction';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ReservationComponent,
+    PaymentComponent,
+    SearchTrainComponent,
+    RegisterComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,32 @@
+form{
+    justify-content: center;
+}
+.card-sizing {
+    width: 90%;
+    margin: 2rem;
+    padding: 1rem;
+}
+
+.spacing{
+    margin: 1rem;
+}
+
+.input {
+    text-align: center;
+}
+
+.txt {
+    height: 20px;
+}
+
+.bold{
+    font-weight: 500;
+}
+
+@media screen and (max-width: 460px) {
+    .card-sizing {
+        width: 100%;
+        margin: .5rem;
+        padding: .5rem;
+    }
+}

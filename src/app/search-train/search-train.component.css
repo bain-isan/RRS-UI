@@ -6,31 +6,30 @@
     background-repeat: no-repeat;
     background-size:cover;
 }
-
-.spacing{
-    margin: 1.5rem;
-}
-
-.alert-spacing{
+.spacing {
     margin: 1rem;
 }
 
-.card-size{
+.alert-spacing {
+    margin: 1rem;
+}
+
+.card-size { 
     width: 400px;
     position: relative;
     left: 4rem;
     top: 4rem;
 }
 
-#register{
+#register {
     text-decoration: none;
 }
 
 @media screen and (max-width: 550px) {
-    .card-size{
+    .card-size {
         width: 300px;
         position: absolute;
-        left: 3rem;
-        top: 3rem;
+        left: 10%;
+        top: 20%;
     }
 }
