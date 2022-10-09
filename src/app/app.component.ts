@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'RailwayReservationSystem';
+  @Input() public customHide = false;
 
   constructor(private _router: Router){}
 
@@ -17,5 +18,9 @@ export class AppComponent {
 
   onRegister(){
     this._router.navigate(['Register']);
+  }
+
+  hide(data:boolean){
+    this.customHide = data;
   }
 }

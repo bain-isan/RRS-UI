@@ -1,0 +1,68 @@
+<div class="main">
+
+    <div class="card card-size ">
+        <h2 class="text-center spacing-left">ADD TRAIN</h2>
+        <form #form="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group  spacing">
+                <label class="form-label" for="lname">Train Number:</label>
+                <input class="form-control" type="number" name="number" placeholder="Enter Number" [(ngModel)]="train.trainNo" #number="ngModel"/>
+            </div>
+
+            <div class="form-group  spacing">
+                <label class="form-label" for="lname">Train Name:</label>
+                <input class="form-control" type="text" name="name" placeholder="Enter Name" [(ngModel)]="train.trainName" #name="ngModel"/>
+            </div>
+
+            <div class="form-group spacing">
+                <label class="form-label">Source Station : </label>
+                <select class="form-select" placeholder="From" name="From" #source="ngModel"
+                    [(ngModel)]="train.sourceStation">
+                    <option *ngFor="let station of stations" [value]="station">{{station}}</option>
+                </select>
+
+            </div>
+
+            <div class="form-group spacing">
+                <label class="form-label">Destination Station : </label>
+                <select class="form-select" placeholder="To" name="To" #destination="ngModel" [(ngModel)]="train.destinationStation">
+                    <option *ngFor="let station of stations" [value]="station">{{station}}</option>
+                </select>
+            </div>
+
+            <div class="form-group  spacing">
+                <label class="form-label" for="lname">Arrival Date:</label>
+                <input class="form-control" type="datetime-local" name="arrival" min="{{startDate}}"  placeholder="Enter Date" [(ngModel)]="train.sourceDepartureTime" #arrival="ngModel" (change)="onArrival()"/>
+            </div>
+
+            <div class="form-group  spacing">
+                <label class="form-label" for="lname">Departure date:</label>
+                <input class="form-control" type="datetime-local" name="departure"  min="{{sourceDate}}" placeholder="Enter Date" [(ngModel)]="train.destinationArrivalTime" #departure="ngModel"  [disabled]="train.sourceDepartureTime == undefined" (change)="onTotalSeat()"/>
+            </div>
+
+            <div class="form-group spacing">
+                <label class="form-label" for="lname">Total Seats:</label>
+                <input class="form-control" type="text" name="seats"  placeholder="Enter Seat" [(ngModel)]="train.totalSeat" #seat="ngModel" (change)="onTotalSeat()"/>
+            </div>
+
+            <div class="form-group spacing">
+                <label class="form-label" for="lname"> AvailableGeneral Seat:</label>
+                <input class="form-control" type="text" name="general" placeholder="Enter General Seat" [(ngModel)]="train.availableGeneralSeat" #general="ngModel" [disabled]="train.totalSeat == undefined || train.totalSeat == 0" (change)="onGeneralSeat()"/>
+            </div>
+
+            <div class="form-group spacing">
+                <label class="form-label" for="lname">Available Ladies Seat:</label>
+                <input class="form-control" type="text" name="ladies" placeholder="Enter Ladies Seat" [(ngModel)]="train.availableLadiesSeat" #ladies="ngModel" disabled/>
+            </div>
+
+            <div class="form-group spacing">
+                <label class="form-label" for="lname">Seat Fare:</label>
+                <input class="form-control" type="text" name="fare" placeholder="Enter Fare" [(ngModel)]="train.seatFare" #fare="ngModel"/>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg form-control"><b>ADD TRAIN</b></button>
+        </form>
+    </div>
+</div>
+
+{{startDate | json}}
+{{sourceDate | json}}

@@ -15,6 +15,7 @@ export class SearchTrainComponent implements OnInit {
   pipe = new DatePipe('en-US');
   public startDate = this.pipe.transform(new Date(), 'YYYY-MM-dd');
   
+  
   public stations:string[] = new Stations().station;
 
   date?: any;

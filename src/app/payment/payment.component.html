@@ -1,83 +1,89 @@
-<div class="card " style="width:30rem">
-  <!-- <div class="alert {{classMsg}} alert-spacing" role="alert">{{message}}</div> -->
-  <div class="text-centre spacing">
-    <h1 class="display-5">Payment</h1>
-  </div>
-  <form novalidate #form="ngForm" (ngSubmit)="onSubmit()">
+<div class="main">
 
-
-    <div class="form-group spacing">
-      <label>Card Holder Name</label>
-      <input class="form-control form-control-lg" placeholder="Full Name" name="CardHolderName"
-        #CardHolderName="ngModel" [(ngModel)]="transaction.CardHolderName" required pattern="[a-zA-Z ]*"
-        [class.is-invalid]="CardHolderName.invalid && CardHolderName.touched">
-      <small class="text-danger" [class.d-none]="CardHolderName.valid || CardHolderName.untouched">Card Holder Name is
-        mandatory and Must be a valid Name</small>
+  <div class="card " style="width:30rem">
+    <!-- <div class="alert {{classMsg}} alert-spacing" role="alert">{{message}}</div> -->
+    <div class="text-centre spacing">
+      <h1 class="display-5">Payment</h1>
     </div>
+    <form novalidate #form="ngForm" (ngSubmit)="onSubmit()">
 
 
-    <div class="form-group spacing">
-      <label>Card Number</label>
-      <input class="form-control form-control-lg" placeholder="16 Digit card number" name="CardNumber"
-        #CardNumber="ngModel" [(ngModel)]="transaction.CardNumber" required maxlength="16" minlength="16"
-        [class.is-invalid]="CardNumber.invalid && CardNumber.touched">
-      <small class="text-danger" [class.d-none]="CardNumber.valid || CardNumber.untouched">Card Number is mandatory and
-        Must be valid 16 digits</small>
-    </div>
+      <div class="form-group spacing">
+        <label>Card Holder Name</label>
+        <input class="form-control form-control-lg" placeholder="Full Name" name="CardHolderName"
+          #CardHolderName="ngModel" [(ngModel)]="transaction.CardHolderName" required pattern="[a-zA-Z ]*"
+          [class.is-invalid]="CardHolderName.invalid && CardHolderName.touched">
+        <small class="text-danger" [class.d-none]="CardHolderName.valid || CardHolderName.untouched">Card Holder Name is
+          mandatory and Must be a valid Name</small>
+      </div>
 
 
-    <!-- <div class="form-row"> -->
-    <!-- <div class="form-group spacing">
-        <label>ExpiryYear</label>
-        <input class="form-control form-control-lg" placeholder="YY" name="ExpiryYear"
-        #ExpiryYear="ngModel" [(ngModel)]="service.formData.ExpiryYear" required maxlength="2" minlength="2"
-        [class.invalid]="ExpiryYear.invalid && ExpiryYear.dirty">
-      </div> -->
-    <div class="form-group spacing">
+      <div class="form-group spacing">
+        <label>Card Number</label>
+        <input class="form-control form-control-lg" placeholder="16 Digit card number" name="CardNumber"
+          #CardNumber="ngModel" [(ngModel)]="transaction.CardNumber" required maxlength="16" minlength="16"
+          [class.is-invalid]="CardNumber.invalid && CardNumber.touched">
+        <small class="text-danger" [class.d-none]="CardNumber.valid || CardNumber.untouched">Card Number is mandatory
+          and
+          Must be valid 16 digits</small>
+      </div>
+
+
+      <!-- <div class="form-row"> -->
+      <!-- <div class="form-group spacing">
       <label>ExpiryYear</label>
-      <select class="form-select form-control-lg" placeholder="YYYY" name="ExpiryYear" #ExpiryYear="ngModel"
-        [(ngModel)]="transaction.ExpiryYear" [class.is-invalid]="ExpiryYear.invalid && ExpiryYear.touched" required>
+      <input class="form-control form-control-lg" placeholder="YY" name="ExpiryYear"
+      #ExpiryYear="ngModel" [(ngModel)]="service.formData.ExpiryYear" required maxlength="2" minlength="2"
+      [class.invalid]="ExpiryYear.invalid && ExpiryYear.dirty">
+    </div> -->
+      <div class="form-group spacing">
+        <label>ExpiryYear</label>
+        <select class="form-select form-control-lg" placeholder="YYYY" name="ExpiryYear" #ExpiryYear="ngModel"
+          [(ngModel)]="transaction.ExpiryYear" [class.is-invalid]="ExpiryYear.invalid && ExpiryYear.touched" required>
 
 
-        <option value="" disabled hidden>--Select Expiry Year--</option>
-        <option *ngFor="let year of years" [value]="year">{{year}}</option>
-      </select>
-      <small class="text-danger" [class.d-none]="ExpiryYear.valid || ExpiryYear.untouched">Expiry Year is mandatory and
-        Must be selected</small>
-    </div>
+          <option value="" disabled hidden>--Select Expiry Year--</option>
+          <option *ngFor="let year of years" [value]="year">{{year}}</option>
+        </select>
+        <small class="text-danger" [class.d-none]="ExpiryYear.valid || ExpiryYear.untouched">Expiry Year is mandatory
+          and
+          Must be selected</small>
+      </div>
 
 
-    <!-- <div class="form-group spacing">
+      <!-- <div class="form-group spacing">
         <label>ExpiryMonth</label>
         <input class="form-control form-control-lg" placeholder="MM" name="ExpiryMonth"
         #ExpiryMonth="ngModel" [(ngModel)]="service.formData.ExpiryMonth" required maxlength="2" minlength="2"
         [class.invalid]="ExpiryMonth.invalid && ExpiryMonth.dirty">
       </div> -->
-    <div class="form-group spacing">
-      <label>ExpiryMonth</label>
-      <select class="form-select form-control-lg" placeholder="YY" name="ExpiryMonth" #ExpiryMonth="ngModel"
-        [(ngModel)]="transaction.ExpiryMonth" [class.is-invalid]="ExpiryMonth.invalid && ExpiryMonth.touched" required>
-        Select Expiry Month
-        <option *ngFor="let month of months" [value]="month">{{month}}</option>
+      <div class="form-group spacing">
+        <label>ExpiryMonth</label>
+        <select class="form-select form-control-lg" placeholder="YY" name="ExpiryMonth" #ExpiryMonth="ngModel"
+          [(ngModel)]="transaction.ExpiryMonth" [class.is-invalid]="ExpiryMonth.invalid && ExpiryMonth.touched"
+          required>
+          Select Expiry Month
+          <option *ngFor="let month of months" [value]="month">{{month}}</option>
 
-      </select>
-      <small class="text-danger" [class.d-none]="ExpiryMonth.valid || ExpiryMonth.untouched">Expiry Month is mandatory
-        and Must be selected</small>
-    </div>
+        </select>
+        <small class="text-danger" [class.d-none]="ExpiryMonth.valid || ExpiryMonth.untouched">Expiry Month is mandatory
+          and Must be selected</small>
+      </div>
 
-    <div class="form-group spacing">
-      <label>CVV</label>
-      <input type="password" class="form-control form-control-lg" placeholder="3 digit security code" name="CVV"
-        #CVV="ngModel" [(ngModel)]="transaction.CVV" required maxlength="3" minlength="3"
-        [class.is-invalid]="CVV.invalid && CVV.touched">
-      <small class="text-danger" [class.d-none]="CVV.valid || CVV.untouched">CVV is mandatory and Must be 3
-        digits</small>
-    </div>
-    <br>
-    <!-- </div> -->
-    <div class="form-group spacing">
-      <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid || form.untouched">PAY AND
-        PROCEED </button>
-    </div>
-  </form>
+      <div class="form-group spacing">
+        <label>CVV</label>
+        <input type="password" class="form-control form-control-lg" placeholder="3 digit security code" name="CVV"
+          #CVV="ngModel" [(ngModel)]="transaction.CVV" required maxlength="3" minlength="3"
+          [class.is-invalid]="CVV.invalid && CVV.touched">
+        <small class="text-danger" [class.d-none]="CVV.valid || CVV.untouched">CVV is mandatory and Must be 3
+          digits</small>
+      </div>
+      <br>
+      <!-- </div> -->
+      <div class="form-group spacing">
+        <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid || form.untouched">PAY AND
+          PROCEED </button>
+      </div>
+    </form>
+  </div>
 </div>

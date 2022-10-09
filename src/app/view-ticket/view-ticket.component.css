@@ -1,0 +1,15 @@
+table {
+    justify-content: center;
+
+    width: 1000px;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+.bold{
+    font-weight: 500;
+}

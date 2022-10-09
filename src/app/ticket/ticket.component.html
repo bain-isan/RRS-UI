@@ -1,0 +1,17 @@
+<div class="main">
+
+    <div class="card card-size">
+        <h1 class="text-centre spacing">Get Ticket</h1>
+        <div>
+            <form #basicForm="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group spacing">
+                    <label for="PNR">PNR Number</label>
+                    <input type="number" name="pnr" class="form-control" id="PNR" placeholder="Eg. 1234567"
+                        [(ngModel)]="pnrNumber">
+
+                </div>
+                <button type="submit" class="btn btn-primary spacing">Submit</button>
+            </form>
+        </div>
+    </div> 
+</div>

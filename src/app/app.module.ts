@@ -15,6 +15,11 @@ import { RegisterComponent } from './register/register.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { ReservationDto } from './shared/reservation-dto';
 import { Transaction } from './shared/transaction';
+import { TicketComponent } from './ticket/ticket.component';
+import { ViewTicketComponent } from './view-ticket/view-ticket.component';
+import { AddTrainComponent } from './add-train/add-train.component';
+import { UpdateTrainComponent } from './update-train/update-train.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +29,11 @@ import { Transaction } from './shared/transaction';
     PaymentComponent,
     SearchTrainComponent,
     RegisterComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    TicketComponent,
+    ViewTicketComponent,
+    AddTrainComponent,
+    UpdateTrainComponent
   ],
   imports: [
     BrowserModule,
