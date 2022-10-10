@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticateService } from '../services/authenticate.service';
 import { TransactionService } from '../services/transaction.service';
 import { PassengerDto } from '../shared/passenger-dto';
 import { ReservationDto } from '../shared/reservation-dto';
@@ -22,12 +23,20 @@ export class PaymentComponent implements OnInit {
   public reservation = new ReservationDto(this.num,'',this.passengers, this.transaction);
 
   constructor(
+    private _auth:AuthenticateService,
     private _service:TransactionService, 
     private _router: Router,
     private _acRouter: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    if(!this._auth.LoggedIn){
+      this._router.navigate(['Login']);
+    }
+    if(this.passengers.length == 0 || this.reservation.TrainId == undefined){
+      this._router.navigate(['Train/Search']);
+    }
+
     let endYear = this.years[0] + 25;
      for(let i= this.years[0], j = 1; i<=endYear; i++, j++){
        this.years[j] = i;
