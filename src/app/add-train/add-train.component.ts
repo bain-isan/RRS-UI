@@ -26,9 +26,9 @@ export class AddTrainComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    if(!this._auth.LoggedIn){
-      this._router.navigate(['Login']);
-    }
+    // if(!this._auth.LoggedIn){
+    //   this._router.navigate(['Login']);
+    // }
   }
 
   onArrival(){

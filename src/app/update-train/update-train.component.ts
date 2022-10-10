@@ -29,9 +29,9 @@ export class UpdateTrainComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    if(!this._auth.LoggedIn){
-      this._router.navigate(['Login']);
-    }
+    // if(!this._auth.LoggedIn){
+    //   this._router.navigate(['Login']);
+    // }
 
     this._acRouter.queryParams.subscribe(
       params => {

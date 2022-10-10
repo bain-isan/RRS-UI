@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Login } from '../shared/login';
 import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 
 
 
@@ -17,26 +19,24 @@ export class LoginComponent implements OnInit {
   public classMsg = "";
 
 
-  constructor(private _loginService: LoginService) { }
+  constructor(
+    private _loginService: LoginService,
+    private _router:Router
+    ) { }
 
   ngOnInit(): void { }
 
   onSubmit() {
     this._loginService.userLogin(this.login).subscribe(
       value => {
-        if (value.jwt == "") {
-          this.message = value.msg;
-          this.classMsg = "alert-danger";
-          
-        }
-        else {
+        
           this.message = value.msg;
           localStorage.setItem("jwt", value.jwt);
+          localStorage.setItem("role", value.role);
           this.classMsg = "alert-success";
+          delay(100);
+          this._router.navigate(['/']);
           
-          console.log("No" + value);
-        }
-        
       },
       error => {
         this.message = error.error.msg;

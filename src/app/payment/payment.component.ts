@@ -30,9 +30,9 @@ export class PaymentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(!this._auth.LoggedIn){
-      this._router.navigate(['Login']);
-    }
+    // if(!this._auth.LoggedIn){
+    //   this._router.navigate(['Login']);
+    // }
     
 
     let endYear = this.years[0] + 25;

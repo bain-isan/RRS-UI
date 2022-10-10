@@ -24,9 +24,9 @@ export class TicketComponent implements OnInit {
     ){}
 
   ngOnInit(): void {
-    if(!this._auth.LoggedIn){
-      this._router.navigate(['Login']);
-    }
+    // if(!this._auth.LoggedIn){
+    //   this._router.navigate(['Login']);
+    // }
   }
  onSubmit(){
   this._service.getTicket(this.pnrNumber).subscribe(

@@ -1,10 +1,7 @@
 .main{
     width: 100vw;
     min-height: 190vh;
-    /* background-image: url("../../assets/images/login-bg.jpg") ;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size:cover; */
+    background-color: rgb(173, 173, 173);
 }
  
 .spacing{

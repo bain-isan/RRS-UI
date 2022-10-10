@@ -1,5 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { delay } from 'rxjs';
 import { RegisterService } from '../services/register.service';
 import { Register } from '../shared/register';
 
@@ -17,7 +19,10 @@ export class RegisterComponent implements OnInit {
   public register = new Register('', '', this.date, '', '', '')
   public genders = ['Male', 'Female', 'Others'];
 
-  constructor(private _service: RegisterService) { }
+  constructor(
+    private _service: RegisterService,
+    private _router:Router
+    ) { }
 
   ngOnInit(): void {
   }
@@ -27,8 +32,8 @@ export class RegisterComponent implements OnInit {
     this._service.userRegister(this.register).subscribe(
       value => {
         this.classMsg = "alert-success";
-        this.message = 'Your UserId: ' + value.userId
-        console.log(value);
+        this.message = 'Your UserId: ' + value.userId;
+        this._router.navigate(['/']);
       },
       error => {
         this.classMsg = "alert-danger";

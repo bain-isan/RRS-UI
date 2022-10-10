@@ -20,9 +20,9 @@ export class TrainListComponent implements OnInit {
   public allTrains: TrainDtoPut[] = [];
 
   ngOnInit(): void {
-    if(!this._auth.LoggedIn){
-      this._router.navigate(['Login']);
-    }
+    // if(!this._auth.LoggedIn){
+    //   this._router.navigate(['Login']);
+    // }
     
     this._service.getAllTrains().subscribe(
       values =>{
