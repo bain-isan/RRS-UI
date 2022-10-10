@@ -1,5 +1,6 @@
 export class TrainDtoPut {
     constructor(
+        public trainId:number,
         public trainNo: number,
         public trainName: string,
         public sourceStation: string,

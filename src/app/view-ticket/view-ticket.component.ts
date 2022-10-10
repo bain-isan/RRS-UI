@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticateService } from '../services/authenticate.service';
 import { CancelTicketService } from '../services/cancel-ticket.service';
 import { PassengerTicket } from '../shared/passenger-ticket';
 import { Ticket } from '../shared/ticket';
@@ -17,14 +18,28 @@ export class ViewTicketComponent implements OnInit {
   public  today:Date = new Date();
   public pipe = new DatePipe('en-US');
   
-  constructor(private _acRouter: ActivatedRoute, private _service:CancelTicketService) { }
+  constructor(
+    private _acRouter: ActivatedRoute, 
+    private _service:CancelTicketService,
+    private _router:Router,
+    private _auth:AuthenticateService
+    ) { }
 
   ngOnInit(): void {
+    if(!this._auth.LoggedIn){
+      this._router.navigate(['Login']);
+    }
     this._acRouter.queryParams.subscribe(
       params =>{
         this.ticket = JSON.parse(params['data']);
+      },
+      error=>{
+
       }
     );
+    if(this.ticket.pnrNumber == undefined){
+      this._router.navigate(['Ticket/Search']);
+    }
   }
 
   cancel(){

@@ -1,6 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AddTrainService } from '../services/add-train.service';
+import { AuthenticateService } from '../services/authenticate.service';
 import { Stations } from '../shared/stations';
 import { Train } from '../shared/train';
 
@@ -17,9 +19,16 @@ export class AddTrainComponent implements OnInit {
   public train = new Train(this.num,'','','',this.num,this.num,this.num,this.num,this.num,this.num);
   public sourceDate:any;
 
-  constructor(private _service:AddTrainService) { }
+  constructor(
+    private _service:AddTrainService,
+    private _router:Router,
+    private _auth:AuthenticateService
+    ) { }
 
   ngOnInit(): void {
+    if(!this._auth.LoggedIn){
+      this._router.navigate(['Login']);
+    }
   }
 
   onArrival(){

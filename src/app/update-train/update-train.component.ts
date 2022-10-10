@@ -1,9 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticateService } from '../services/authenticate.service';
 import { UpdateTrainService } from '../services/update-train.service';
 import { Stations } from '../shared/stations';
 import { Train } from '../shared/train';
+import { TrainDtoPut } from '../shared/train-dto-put';
 
 
 @Component({
@@ -16,17 +18,30 @@ export class UpdateTrainComponent implements OnInit {
   pipe = new DatePipe('en-US');
   public startDate = this.pipe.transform(new Date(), 'YYYY-MM-dd hh:mm');
   public stations:string[] = new Stations().station;
-  public train = new Train(this.num,'','','',this.num,this.num,this.num,this.num,this.num,this.num);
+  public train = new TrainDtoPut(this.num,this.num,'','','',this.num,this.num,this.num,this.num,this.num,this.num);
   public sourceDate:any;
 
-  constructor(private _service:UpdateTrainService, private _acRouter:ActivatedRoute) { }
+  constructor(
+    private _service:UpdateTrainService, 
+    private _acRouter:ActivatedRoute,
+    private _router:Router,
+    private _auth:AuthenticateService
+    ) { }
 
   ngOnInit(): void {
+    if(!this._auth.LoggedIn){
+      this._router.navigate(['Login']);
+    }
+
     this._acRouter.queryParams.subscribe(
       params => {
         this.train = JSON.parse(params['data']);
       }
     )
+    
+    if(this.train.trainId == undefined){
+      this._router.navigate(['Train/View']);
+    }
   }
 
   onArrival(){

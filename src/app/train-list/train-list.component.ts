@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticateService } from '../services/authenticate.service';
 import { TrainListService } from '../services/train-list.service';
 import { TrainDtoPut } from '../shared/train-dto-put';
 
@@ -10,11 +11,19 @@ import { TrainDtoPut } from '../shared/train-dto-put';
 })
 export class TrainListComponent implements OnInit {
 
-  constructor(public _service:TrainListService, private _route:Router) { }
+  constructor(
+    public _service:TrainListService, 
+    private _router:Router,
+    private _auth:AuthenticateService
+    ) { }
   
   public allTrains: TrainDtoPut[] = [];
 
   ngOnInit(): void {
+    if(!this._auth.LoggedIn){
+      this._router.navigate(['Login']);
+    }
+    
     this._service.getAllTrains().subscribe(
       values =>{
         this.allTrains = values;
@@ -22,14 +31,14 @@ export class TrainListComponent implements OnInit {
       error =>{
         console.log(error);
       }
-    )
+    );
   }
 
   onUpdate(result:TrainDtoPut){
-    this._route.navigate(['Train/Update'], {queryParams: {data: JSON.stringify(result)}});
+    this._router.navigate(['Train/Update'], {queryParams: {data: JSON.stringify(result)}});
   }
 
   onAddTrain(){
-    this._route.navigate(['Train/Add']);
+    this._router.navigate(['Train/Add']);
   }
 }

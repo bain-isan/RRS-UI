@@ -22,7 +22,7 @@ const routes: Routes = [
   {path:"Reservation", component:ReservationComponent},
   {path:"Payment", component:PaymentComponent},
   {path:"Ticket/Search", component:TicketComponent},
-  {path:"Ticket/Views", component:ViewTicketComponent},
+  {path:"Ticket/View", component:ViewTicketComponent},
   {path:"Train/Add", component:AddTrainComponent},
   {path:"Train/View", component:TrainListComponent},
   {path:"Train/Update", component:UpdateTrainComponent}

@@ -33,9 +33,7 @@ export class PaymentComponent implements OnInit {
     if(!this._auth.LoggedIn){
       this._router.navigate(['Login']);
     }
-    if(this.passengers.length == 0 || this.reservation.TrainId == undefined){
-      this._router.navigate(['Train/Search']);
-    }
+    
 
     let endYear = this.years[0] + 25;
      for(let i= this.years[0], j = 1; i<=endYear; i++, j++){
@@ -48,6 +46,11 @@ export class PaymentComponent implements OnInit {
         this.totalFare = JSON.parse(params['totalFare']);
       }
      )
+      console.log(this.reservation);
+      console.log(this.reservation.TrainId);
+      if(this.reservation == null || this.reservation.TrainId == undefined){
+       this._router.navigate(['Train/Search']);
+      }
   }
 
   onSubmit(){
