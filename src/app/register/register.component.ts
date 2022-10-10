@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       value => {
         this.classMsg = "alert-success";
         this.message = 'Your UserId: ' + value.userId;
-        this._router.navigate(['/']);
+        this._router.navigate(['Login']);
       },
       error => {
         this.classMsg = "alert-danger";

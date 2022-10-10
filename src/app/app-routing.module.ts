@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AddTrainComponent } from './add-train/add-train.component';
+import { RoleGuard } from './Auth/role.guard';
 import { RouteGuardGuard } from './Auth/route-guard.guard';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import {LoginComponent} from './login/login.component';
@@ -22,13 +23,13 @@ const routes: Routes = [
   {path:"Train/Available",component:SearchResultComponent},
   {path:"Login", component: LoginComponent},
   {path:"Register", component: RegisterComponent},
-  {path:"Reservation", component:ReservationComponent, canActivate:[RouteGuardGuard], data:{role:"User"}},
-  {path:"Payment", component:PaymentComponent, canActivate:[RouteGuardGuard], data:{role:"User"}},
-  {path:"Ticket/Search", component:TicketComponent, canActivate:[RouteGuardGuard], data:{role:"User"}},
-  {path:"Ticket/View", component:ViewTicketComponent, canActivate:[RouteGuardGuard], data:{role:"User"}},
-  {path:"Train/Add", component:AddTrainComponent, canActivate:[RouteGuardGuard], data:{role:"Admin"}},
-  {path:"Train/View", component:TrainListComponent, canActivate:[RouteGuardGuard] , data:{role:"Admin"}},
-  {path:"Train/Update", component:UpdateTrainComponent, canActivate:[RouteGuardGuard], data:{role:"Admin"}},
+  {path:"Reservation", component:ReservationComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["User"]}},
+  {path:"Payment", component:PaymentComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["User"]}},
+  {path:"Ticket/Search", component:TicketComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["User","Admin"]}},
+  {path:"Ticket/View", component:ViewTicketComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["User","Admin"]}},
+  {path:"Train/Add", component:AddTrainComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["Admin"]}},
+  {path:"Train/View", component:TrainListComponent, canActivate:[RouteGuardGuard, RoleGuard] , data:{role:["Admin"]}},
+  {path:"Train/Update", component:UpdateTrainComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["Admin"]}},
   {path:"Forbidden", component:ForbiddenComponent},
   {path:"**", component:NotFoundComponent}
 ];

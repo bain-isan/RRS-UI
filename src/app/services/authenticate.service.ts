@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticateService {
-  private _isLoggedIn = false;
+  private _isPrint = false;
   constructor(private _router:Router) { }
 
   get LoggedIn(){
@@ -15,20 +15,17 @@ export class AuthenticateService {
     return true;
   }
 
-  // getRole(role: any){
-  //   let Token = localStorage.getItem('jwt');
-  //   if(Token != null){
-  //     let Role = JSON.parse(atob(Token.split('.')[1])).role;
+  getRole(role: any[]){
+    let Role = localStorage.getItem('role');
+    if(Role != undefined){
 
-  //     console.log(JSON.parse(atob(Token)));
-
-  //     if(Role == role){
-  //       return true;
-  //     }
-  //   }
-  //   this._router.navigate(['Forbidden'])
-  //   return false;
-  // }
+      if(role.includes(Role)){
+        return true;
+      }
+    }
+    this._router.navigate(['Forbidden'])
+    return false;
+  }
 
   getName(role: any){
     let Token = localStorage.getItem('jwt');
@@ -39,5 +36,10 @@ export class AuthenticateService {
       
     }
     return null;
+  }
+
+  get Role(){
+    let role = localStorage.getItem('role');
+    return role;
   }
 }

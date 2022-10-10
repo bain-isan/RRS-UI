@@ -41,16 +41,17 @@ export class AddTrainComponent implements OnInit {
   }
 
   onGeneralSeat(){
-    this.train.availableLadiesSeat=this.train.totalSeat-this.train.availableGeneralSeat;
+    if(this.train.availableGeneralSeat <= this.train.totalSeat && this.train.availableGeneralSeat>=0)
+      this.train.availableLadiesSeat=this.train.totalSeat-this.train.availableGeneralSeat;
   }
 
   onSubmit(){
     this._service.addTrain(this.train).subscribe(
       value=>{
-        //Show Successfully Added Msg
+        console.log("Success");
       },
       error=>{
-
+        console.log("error");
       }
     )
     console.log(this.train);

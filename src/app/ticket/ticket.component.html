@@ -3,14 +3,15 @@
     <div class="card card-size">
         <h1 class="text-centre spacing">Get Ticket</h1>
         <div>
-            <form #basicForm="ngForm" (ngSubmit)="onSubmit()">
+            <form #form="ngForm" (ngSubmit)="onSubmit()">
                 <div class="form-group spacing">
                     <label for="PNR">PNR Number</label>
                     <input type="number" name="pnr" class="form-control" id="PNR" placeholder="Eg. 1234567"
-                        [(ngModel)]="pnrNumber">
+                        [(ngModel)]="pnrNumber" #pnr="ngModel" pattern="\d{7,9}" minlength="7" maxlength="9" [class.is-invalid]="pnr.invalid && pnr.touched" required>
 
+                    <small class='text-danger' [class.d-none]="pnr.valid || pnr.untouched">Mandatory and Must be Valid PNR [7-9 Digits]</small>
                 </div>
-                <button type="submit" class="btn btn-primary spacing">Submit</button>
+                <button type="submit" class="btn btn-primary spacing" [disabled]="form.invalid || form.untouched">Search</button>
             </form>
         </div>
     </div> 

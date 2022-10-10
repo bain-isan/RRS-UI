@@ -13,3 +13,13 @@ td {
 .bold{
     font-weight: 500;
 }
+
+@media print{
+    .print-ticket{
+        display: none;
+    }
+
+    #print{
+        margin-top: 2cm;
+    }
+}

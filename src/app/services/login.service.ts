@@ -15,5 +15,7 @@ export class LoginService {
     return this.http.post<any>(this.url, login);
   }
 
-  
+  userLogout(){
+    localStorage.clear();
+  }
 }

@@ -1,4 +1,4 @@
-<div class="bg">
+<div class="print-Ticket">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <!-- Container wrapper -->
@@ -16,15 +16,23 @@
           <img src="../assets/images/logo.png" height="20" alt="MDB Logo" loading="lazy" />
         </a>
         <!-- Left links -->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" href="">SearchTrain</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="Ticket/Search">Ticket</a>
-          </li>
-
-        </ul>
+        <!--On User Login-->
+        <div class="">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+            <li class="nav-item" *ngIf="checkUser()">
+              <a class="nav-link active" href="Train/Search">Search Train</a>
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link active" *ngIf="checkAdmin()" href="Train/View">View All Train</a>
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link active" *ngIf="checkUser() || checkAdmin()" href="Ticket/Search">Search Ticket</a>
+            </li>
+            <li class="nav-item" *ngIf="checkUser()">
+              <a class="nav-link active" href="Ticket/Search">Cancellation</a>
+            </li>
+          </ul>
+        </div>
         <!-- Left links -->
       </div>
       <!-- Collapsible wrapper -->
@@ -33,10 +41,11 @@
       <div class="d-flex align-items-center">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" href="Login">Login</a>
+            <a class="nav-link active" *ngIf="!check()" href="Login">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="Register">Register</a>
+            <a class="nav-link active" *ngIf="!check()" href="Register">Register</a>
+            <a class="nav-link active" *ngIf="check()" (click)="onLogout()">Logout</a>
           </li>
 
         </ul>
@@ -46,13 +55,14 @@
     <!-- Container wrapper -->
   </nav>
   <!-- Navbar -->
+</div>
 
   <div>
     <router-outlet></router-outlet>
   </div>
 
 
-
+<div class="print-Ticket">
   <!-- Footer -->
   <section class="">
     <!-- Footer -->
@@ -122,7 +132,7 @@
       <!-- Copyright -->
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2020 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">PRTC.com</a>
+        <a class="text-white" href="http://localhost:4200/">PRTC.com</a>
       </div>
       <!-- Copyright -->
     </footer>

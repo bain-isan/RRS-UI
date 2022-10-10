@@ -1,53 +1,53 @@
-<h1 class="text-center">Pakistan Railway Travel Corporation</h1>
-<h2 class="text-center">Status: <span [class.text-success]="ticket.status == 'Confirmed'" 
-    [class.text-danger]="ticket.status == 'Cancelled'">{{ticket.status}}</span></h2>
-<table class="table" align="center">
+<div id="print">
+    <h1 class="text-center">Pakistan Railway Travel Corporation</h1>
+    <h2 class="text-center">Status: <span [class.text-success]="ticket.status == 'Confirmed'"
+            [class.text-danger]="ticket.status == 'Cancelled'">{{ticket.status}}</span></h2>
+    <table class="table" align="center">
 
-    <tr>
-        <td><span class="bold">Train No:</span> {{ticket.trainNo}}</td>
-        <td><span class="bold">Train Name:</span> {{ticket.trainName}}</td>
-        <td><span class="bold">Pnr Number:</span> {{ticket.pnrNumber}}</td>
-    </tr>
-    <tr>
-        <td><span class="bold">Booking Date:</span> {{ticket.bookingDate}}</td>
-        <td><span class="bold">Source Station:</span> {{ticket.sourceStation}}</td>
-        <td><span class="bold">Destination Station:</span> {{ticket.destinationStation}}</td>
-    </tr>
-    <tr>
-        <td><span class="bold">Source Departure Time:</span> {{ticket.sourceDepartureTime | date:'medium'}}</td>
-        <td><span class="bold">Destination Arrival Time:</span> {{ticket.destinationArrivalTime | date:'medium'}}</td>
-        <td><span class="bold">Total Fare:</span> {{ticket.totalFare | currency:'PKR'}}</td>
-    </tr>
-    <tr>
-        <td><span class="bold">Transaction Number:</span> {{ticket.transactionNumber}}</td>
-        <td><span class="bold">Status:</span> {{ticket.status}}</td>
-        <td><span class="bold">Quota Name:</span> {{ticket.quotaName}}</td>
-    </tr>
-</table>
+        <tr>
+            <td><span class="bold">Train No:</span> {{ticket.trainNo}}</td>
+            <td><span class="bold">Train Name:</span> {{ticket.trainName}}</td>
+            <td><span class="bold">Pnr Number:</span> {{ticket.pnrNumber}}</td>
+        </tr>
+        <tr>
+            <td><span class="bold">Booking Date:</span> {{ticket.bookingDate}}</td>
+            <td><span class="bold">Source Station:</span> {{ticket.sourceStation}}</td>
+            <td><span class="bold">Destination Station:</span> {{ticket.destinationStation}}</td>
+        </tr>
+        <tr>
+            <td><span class="bold">Source Departure Time:</span> {{ticket.sourceDepartureTime | date:'medium'}}</td>
+            <td><span class="bold">Destination Arrival Time:</span> {{ticket.destinationArrivalTime | date:'medium'}}
+            </td>
+            <td><span class="bold">Total Fare:</span> {{ticket.totalFare | currency:'PKR'}}</td>
+        </tr>
+        <tr>
+            <td><span class="bold">Transaction Number:</span> {{ticket.transactionNumber}}</td>
+            <td><span class="bold">Status:</span> {{ticket.status}}</td>
+            <td><span class="bold">Quota Name:</span> {{ticket.quotaName}}</td>
+        </tr>
+    </table>
 
-<br>
-<table class="table" align="center">
+    <br>
+    <table class="table" align="center">
 
-    <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th> Gender</th>
-        <th>Phone</th>
-        <th>SeatNo</th>
-    </tr>
-    <tr *ngFor="let pass of ticket.passengerTicket">
-        <td>{{pass.name}}</td>
-        <td>{{pass.age}}</td>
-        <td>{{pass.gender}}</td>
-        <td>{{pass.phone}}</td>
-        <td>{{pass.seat}}</td>
-    </tr>
-</table>
-
-<div class="text-center">
-    <button class="btn btn-primary btn-lg" (click)="printThisPage()">print</button>
-    <button class="btn btn-danger btn-lg" (click)="cancel()" >Cancel</button>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th> Gender</th>
+            <th>Phone</th>
+            <th>SeatNo</th>
+        </tr>
+        <tr *ngFor="let pass of ticket.passengerTicket">
+            <td>{{pass.name}}</td>
+            <td>{{pass.age}}</td>
+            <td>{{pass.gender}}</td>
+            <td>{{pass.phone}}</td>
+            <td>{{pass.seat}}</td>
+        </tr>
+    </table>
+</div>
+<div class="text-center print-ticket">
+    <button class="btn btn-primary btn-lg "  (click)="printThisPage()">Print</button>
+    <button class="btn btn-danger btn-lg"  (click)="cancel()">Cancel</button>
 </div>
 
-{{ticket.sourceDepartureTime}}
-{{today|date:"short"}}

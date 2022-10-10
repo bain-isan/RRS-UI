@@ -65,8 +65,6 @@ export class ViewTicketComponent implements OnInit {
   }
 
   printThisPage(){
-    //this.customHide= true;
     window.print();
-    //this.customHide = false;
   }
 }

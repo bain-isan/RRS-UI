@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReservationDto } from '../shared/reservation-dto';
 import { ReservationNoTran } from '../shared/reservation-no-tran';
+import { Ticket } from '../shared/ticket';
 import { Transaction } from '../shared/transaction';
 
 @Injectable({
@@ -15,6 +16,6 @@ export class TransactionService {
   constructor(private _http: HttpClient, private route: Router) { }
 
   postReservation(reservation:ReservationDto) {
-    return this._http.post(this._baseUrl, reservation);
+    return this._http.post<Ticket>(this._baseUrl, reservation);
   }
 }

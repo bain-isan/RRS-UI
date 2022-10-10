@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticateService } from '../services/authenticate.service';
 import { UpdateTrainService } from '../services/update-train.service';
 import { Stations } from '../shared/stations';
-import { Train } from '../shared/train';
 import { TrainDtoPut } from '../shared/train-dto-put';
 
 

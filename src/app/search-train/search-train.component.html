@@ -6,27 +6,30 @@
 
             <div class="form-group spacing">
                 <label class="form-label">From : </label>
-                <select class="form-select" placeholder="From" name="From" #From="ngModel"
-                    [(ngModel)]="searchTrain.From">
+                <select class="form-select" placeholder="From" name="From" #from="ngModel"
+                    [(ngModel)]="searchTrain.From" [class.is-invalid]="from.invalid && from.touched" required>
                     <option *ngFor="let station of stations" [value]="station">{{station}}</option>
                 </select>
-
+                <small class="text-danger" [class.d-none]="from.valid || from.untouched">Mandatory and Must be Selected</small>
             </div>
 
             <div class="form-group spacing">
                 <label class="form-label">To : </label>
-                <select class="form-select" placeholder="To" name="To" #From="ngModel" [(ngModel)]="searchTrain.To">
+                <select class="form-select" placeholder="To" name="To" #to="ngModel" [(ngModel)]="searchTrain.To"
+                [class.is-invalid]="to.invalid && to.touched" required>
                     <option *ngFor="let station of stations" [value]="station">{{station}}</option>
                 </select>
+                <small class="text-danger" [class.d-none]="to.valid || to.untouched">Mandatory and Must be Selected</small>
             </div>
 
             <div class="form-group spacing">
                 <label class="form-label">Date : </label>
-                <input type="date" class="form-control" placeholder="Date" name="TrainDate" #Date="ngModel"
-                    [(ngModel)]="searchTrain.TrainDate" min="{{startDate}}">
+                <input type="date" class="form-control" placeholder="Date" name="TrainDate" #date="ngModel"
+                    [(ngModel)]="searchTrain.TrainDate" min="{{startDate}}" [class.is-invalid]="date.invalid && date.touched" required>
+                    <small class="text-danger" [class.d-none]="date.valid || date.untouched">Mandatory and Must be Selected</small>
             </div>
             <div class="form-group spacing">
-                <button class="btn btn-primary btn-lg form-control" type="search">Search</button>
+                <button class="btn btn-primary btn-lg form-control" type="search" [disabled]="form.invalid || form.untouched">Search</button>
             </div>
         </form>
     </div>

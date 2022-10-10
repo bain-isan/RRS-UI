@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticateService } from '../services/authenticate.service';
 import { TransactionService } from '../services/transaction.service';
 import { PassengerDto } from '../shared/passenger-dto';
+import { PassengerTicket } from '../shared/passenger-ticket';
 import { ReservationDto } from '../shared/reservation-dto';
+import { Ticket } from '../shared/ticket';
 import { Transaction } from '../shared/transaction';
 
 @Component({
@@ -20,8 +22,9 @@ export class PaymentComponent implements OnInit {
   public totalFare = 0;
   public transaction = new Transaction('',this.num,this.num,this.num,'');
   public passengers:PassengerDto[] = [];
+  public passengerTic:PassengerTicket[] = [];
   public reservation = new ReservationDto(this.num,'',this.passengers, this.transaction);
-
+  public ticket = new Ticket(this.num,'',this.num,this.num,'','',this.num,this.num,this.num,this.num,'','',this.passengerTic);
   constructor(
     private _auth:AuthenticateService,
     private _service:TransactionService, 
@@ -58,6 +61,8 @@ export class PaymentComponent implements OnInit {
     console.log(this.reservation);
     this._service.postReservation(this.reservation).subscribe(
       value =>{
+        this.ticket = value;
+        this._router.navigate(['Ticket/View'], {queryParams:{data:JSON.stringify(this.ticket)}})
         console.log(value);
       },
       error =>{

@@ -26,6 +26,14 @@ img{
 }
 
 bg{
-    background-color: rgb(173, 173, 173);
+    background-image: url("../assets/images/login-bg.jpg") ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
 }
 
+@media print {
+    .print-Ticket{
+        display:none;
+    }
+  }

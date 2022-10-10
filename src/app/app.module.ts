@@ -13,8 +13,6 @@ import { PaymentComponent } from './payment/payment.component';
 import { SearchTrainComponent } from './search-train/search-train.component';
 import { RegisterComponent } from './register/register.component';
 import { SearchResultComponent } from './search-result/search-result.component';
-import { ReservationDto } from './shared/reservation-dto';
-import { Transaction } from './shared/transaction';
 import { TicketComponent } from './ticket/ticket.component';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { AddTrainComponent } from './add-train/add-train.component';
