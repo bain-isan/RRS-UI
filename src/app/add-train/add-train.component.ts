@@ -72,4 +72,8 @@ export class AddTrainComponent implements OnInit {
     )
     console.log(this.train);
   }
+
+  ngOnDestroy(): void {    
+    window.history.replaceState(null, '', 'Train/View');
+  }
 }

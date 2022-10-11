@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SearchTrainService } from '../services/search-train.service';
 import { SearchResult } from '../shared/search-result';
 import { SearchTrain } from '../shared/search-train';
@@ -22,7 +23,10 @@ export class SearchTrainComponent implements OnInit {
   date?: any;
   public searchTrain = new SearchTrain('', '', this.date);
 
-  constructor(private _service: SearchTrainService) { }
+  constructor(
+    private _service: SearchTrainService,
+    private _route: Router
+    ) { }
 
   ngOnInit(): void { }
 
@@ -32,10 +36,8 @@ export class SearchTrainComponent implements OnInit {
       value => {
         let searchResult: SearchResult[] = [];
         if(Array.isArray(value)){
-          for(let res of value){
-            searchResult.push(res);
-          }
-          this._service.show(searchResult);
+          this._service.setTrain(value);
+          this._route.navigate(['Train/Available']);
         }
       },
       error => {

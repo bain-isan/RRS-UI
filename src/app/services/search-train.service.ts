@@ -13,10 +13,15 @@ export class SearchTrainService {
   public searchResult:SearchResult[] = [];
   constructor(private http:HttpClient, private _router:Router) { }
 
-  public show(res:SearchResult[]){
-    this.searchResult = res;
-    this._router.navigate(['Train/Available'], {queryParams:{data: JSON.stringify(this.searchResult)}});
-  }
+   setTrain(dto:SearchResult[]){
+     this.searchResult = dto;
+     console.log(this.searchResult);
+   }
+
+   getTrain(){
+    console.log(this.searchResult);
+    return this.searchResult;
+   }
   
   readonly baseUrl = 'https://localhost:44367/Train/Search';
 

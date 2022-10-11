@@ -23,13 +23,13 @@ const routes: Routes = [
   {path:"Train/Available",component:SearchResultComponent},
   {path:"Login", component: LoginComponent},
   {path:"Register", component: RegisterComponent},
-  {path:"Reservation", component:ReservationComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["User"]}},
+  {path:"Reservation/:TrainId", component:ReservationComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["User"]}},
   {path:"Payment", component:PaymentComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["User"]}},
   {path:"Ticket/Search", component:TicketComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["User","Admin"]}},
-  {path:"Ticket/View", component:ViewTicketComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["User","Admin"]}},
+  {path:"Ticket/View/:pnr", component:ViewTicketComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["User","Admin"]}},
   {path:"Train/Add", component:AddTrainComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["Admin"]}},
+  {path:"Train/Update/:TrainId", component:UpdateTrainComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["Admin"]}},
   {path:"Train/View", component:TrainListComponent, canActivate:[RouteGuardGuard, RoleGuard] , data:{role:["Admin"]}},
-  {path:"Train/Update", component:UpdateTrainComponent, canActivate:[RouteGuardGuard, RoleGuard], data:{role:["Admin"]}},
   {path:"Forbidden", component:ForbiddenComponent},
   {path:"**", component:NotFoundComponent}
 ];

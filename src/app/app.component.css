@@ -32,6 +32,10 @@ bg{
     background-size:cover;
 }
 
+.hand:hover{
+    cursor: pointer;;
+}
+
 @media print {
     .print-Ticket{
         display:none;

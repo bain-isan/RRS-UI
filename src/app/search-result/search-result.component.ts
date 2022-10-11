@@ -19,27 +19,26 @@ export class SearchResultComponent implements OnInit {
   ) { }
 
   public searchResult: SearchResult[] = [];
+  public searchResultReset: SearchResult[] = [];
 
   ngOnInit(): void {
-    this._acRoute.queryParams.subscribe(
-      params => {
-        this.searchResult = JSON.parse(params['data']);
-        console.log(this.searchResult);
+    
+    this.searchResult = this._service.getTrain();
 
-        if (this.searchResult.length == 0) {
-          this._router.navigate(['Train/Search']);
-        }
-      }
-    )
+    if(this.searchResult.length <= 0){
+      this._router.navigate(['Train/Search']);
+    }
+
+    console.log(this._service.getTrain());
   }
 
   onBook(result: SearchResult) {
-    if (!this._auth.LoggedIn) {
-      this._router.navigate(['Login']);
-    }
-    else {
-      this._router.navigate(['Reservation'], { queryParams: { data: JSON.stringify(result) } });
-    }
+
+      //this._router.navigate(['Reservation'], { queryParams: { data: JSON.stringify(result) } });
+      this._router.navigate(['Reservation', result.trainId]);
   }
 
+  roleUser(){
+    return localStorage.getItem('role') == 'User';
+  }
 }

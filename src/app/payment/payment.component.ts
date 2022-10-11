@@ -5,6 +5,7 @@ import { TransactionService } from '../services/transaction.service';
 import { PassengerDto } from '../shared/passenger-dto';
 import { PassengerTicket } from '../shared/passenger-ticket';
 import { ReservationDto } from '../shared/reservation-dto';
+import { ReservationNoTran } from '../shared/reservation-no-tran';
 import { Ticket } from '../shared/ticket';
 import { Transaction } from '../shared/transaction';
 
@@ -27,7 +28,9 @@ export class PaymentComponent implements OnInit {
   public passengerTic:PassengerTicket[] = [];
   public reservation = new ReservationDto(this.num,'',this.passengers, this.transaction);
   public ticket = new Ticket(this.num,'',this.num,this.num,'','',this.num,this.num,this.num,this.num,'','',this.passengerTic);
-
+  
+  public searchResult?: any;
+  public reservationNT = new ReservationNoTran(this.num, '', this.passengers);
   constructor(
     private _auth:AuthenticateService,
     private _service:TransactionService, 
@@ -36,27 +39,24 @@ export class PaymentComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // if(!this._auth.LoggedIn){
-    //   this._router.navigate(['Login']);
-    // }
     
-
+    let res = this._service.getReservation();
+    if(res != undefined){
+      this.reservation.TrainId = res.TrainId;
+      this.reservation.QuotaName = res.QuotaName;
+      this.reservation.Passengers = res.Passengers;
+    }
+    else{
+      this._router.navigate(['Train/Search']);
+    }
+    if(this.reservation.TrainId == undefined){
+      this._router.navigate(['Train/Search']);
+     }
+     console.log(res);
     let endYear = this.years[0] + 25;
      for(let i= this.years[0], j = 1; i<=endYear; i++, j++){
        this.years[j] = i;
-     }
-
-     this._acRouter.queryParams.subscribe(
-      params=>{
-        this.reservation = JSON.parse(params['reservation']);
-        this.totalFare = JSON.parse(params['totalFare']);
-      }
-     )
-      console.log(this.reservation);
-      console.log(this.reservation.TrainId);
-      if(this.reservation == null || this.reservation.TrainId == undefined){
-       this._router.navigate(['Train/Search']);
-      }
+     }      
   }
 
   onSubmit(){
@@ -72,7 +72,7 @@ export class PaymentComponent implements OnInit {
         this.ticket = value;
         this.message = "Payment Successfull";
         this.classMsg = "alert-success";
-        setTimeout(()=>{this._router.navigate(['Ticket/View'], {queryParams:{data:JSON.stringify(this.ticket)}})}, 2500);
+        setTimeout(()=>{this._router.navigate(['Ticket/View', value.pnrNumber])}, 2500);
       },
       error =>{
         window.scroll({
@@ -84,6 +84,12 @@ export class PaymentComponent implements OnInit {
         this.classMsg = "alert-danger";
       }
     )
+  }
+  
+  ngOnDestroy(): void {    
+    window.history.replaceState(null, '', 'Train/Search');
+    this._service.setReservation(this.reservationNT);
+    console.log(this._service.getReservation());
   }
 
 }

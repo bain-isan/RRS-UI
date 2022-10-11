@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticateService } from '../services/authenticate.service';
+import { TrainListService } from '../services/train-list.service';
 import { UpdateTrainService } from '../services/update-train.service';
 import { Stations } from '../shared/stations';
 import { TrainDtoPut } from '../shared/train-dto-put';
@@ -26,25 +27,35 @@ export class UpdateTrainComponent implements OnInit {
 
   constructor(
     private _service:UpdateTrainService, 
+    private _trainList:TrainListService,
     private _acRouter:ActivatedRoute,
     private _router:Router,
     private _auth:AuthenticateService
     ) { }
 
   ngOnInit(): void {
-    // if(!this._auth.LoggedIn){
-    //   this._router.navigate(['Login']);
-    // }
+    window.history.replaceState(null, '', 'Train/View');
+    let trainId = this._acRouter.snapshot.paramMap.get('TrainId');
+    if (trainId != null) {
+      this._trainList.getTrainById(parseInt(trainId)).subscribe(
+        value => {
+          this.train = value;
 
-    this._acRouter.queryParams.subscribe(
-      params => {
-        this.train = JSON.parse(params['data']);
-      }
-    )
-    
-    if(this.train.trainId == undefined){
+          console.log(this.train);
+        },
+        error => {
+          console.log(error);
+          
+          this._router.navigate(['Train/View']);
+          
+        }
+      )
+      console.log(this.train);
+    }
+    else {
       this._router.navigate(['Train/View']);
     }
+    console.log(this.train);
   }
 
   onArrival(){
@@ -79,5 +90,11 @@ export class UpdateTrainComponent implements OnInit {
       }
     )
     console.log(this.train);
+  }
+
+  ngOnDestroy(): void { 
+     
+    // window.history.replaceState(null, '', 'Train/Search');
+    window.history.pushState(null, '', 'Ticket/Search');
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticateService } from '../services/authenticate.service';
 import { TicketService } from '../services/ticket.service';
 import { PassengerTicket } from '../shared/passenger-ticket';
@@ -22,23 +22,24 @@ export class TicketComponent implements OnInit {
   constructor(
     private _service:TicketService, 
     private _router:Router,
-    private _auth:AuthenticateService
+    private _auth:AuthenticateService,
+    private _acRoute:ActivatedRoute
     ){}
 
   ngOnInit(): void {
-    // if(!this._auth.LoggedIn){
-    //   this._router.navigate(['Login']);
-    // }
+    
+
   }
  onSubmit(){
+  console.log(this.pnrNumber);
   this._service.getTicket(this.pnrNumber).subscribe(
     value=>{
       this.ticket = value;      
-      this._router.navigate(['Ticket/View'], {queryParams:{data:JSON.stringify(this.ticket)}})
+      this._router.navigate(['Ticket/View', this.ticket.pnrNumber]);
     },
     error=>{
       this.message = error.error.msg;
-      this.classMsg = "alert-danger"
+      this.classMsg = "alert-danger";
       console.log(error.error.msg);
     }
     
