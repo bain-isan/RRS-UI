@@ -46,7 +46,7 @@
                     <div class="form-group spacing-right">
                         <label class="form-label" for="fname">Password:</label>
                         <input class="form-control" type="Password" name="Password" placeholder="Enter Password" required [(ngModel)]="register.Password"
-                        #password="ngModel"  minlength="8"
+                        #password="ngModel"  minlength="8" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]*"
                         [class.is-invalid]="password.invalid && password.touched">
                         <small class="text-danger" [class.d-none]="password.valid || password.untouched">Mandatory and Must be a valid Passowrd<br>
                             <ul>

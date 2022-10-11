@@ -1,5 +1,6 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
 import { AuthenticateService } from './services/authenticate.service';
 import { LoginService } from './services/login.service';
 
@@ -67,9 +68,5 @@ export class AppComponent implements OnInit {
       return this.check() && role == 'User' ? true : false;
     }
     return false;
-  }
-
-  hide(){
-    
   }
 }

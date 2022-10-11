@@ -27,7 +27,7 @@ export class AuthenticateService {
     return false;
   }
 
-  getName(role: any){
+  getName(){
     let Token = localStorage.getItem('jwt');
     if(Token != null){
       let Name = JSON.parse(atob(Token.split('.')[1])).name;
