@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticateService } from './services/authenticate.service';
 import { LoginService } from './services/login.service';
@@ -16,6 +16,14 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.check();
   }
+
+  @HostListener('window:unload', [ '$event' ])
+  unloadHandler() {
+      localStorage.clear();
+  }
+
+  @HostListener('window:unload', [ '$event' ])
+  reloadHandler() {}
 
   onLogin() {
     this.check();

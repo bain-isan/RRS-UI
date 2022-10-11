@@ -12,18 +12,21 @@ import { Train } from '../shared/train';
   styleUrls: ['./add-train.component.css']
 })
 export class AddTrainComponent implements OnInit {
-  num?:any;
+  num?: any;
   pipe = new DatePipe('en-US');
   public startDate = this.pipe.transform(new Date(), 'YYYY-MM-dd hh:mm');
-  public stations:string[] = new Stations().station;
-  public train = new Train(this.num,'','','',this.num,this.num,this.num,this.num,this.num,this.num);
-  public sourceDate:any;
+  public stations: string[] = new Stations().station;
+  public train = new Train(this.num, '', '', '', this.num, this.num, this.num, this.num, this.num, this.num);
+  public sourceDate: any;
+  public message = "";
+
+  public classMsg = "";
 
   constructor(
-    private _service:AddTrainService,
-    private _router:Router,
-    private _auth:AuthenticateService
-    ) { }
+    private _service: AddTrainService,
+    private _router: Router,
+    private _auth: AuthenticateService
+  ) { }
 
   ngOnInit(): void {
     // if(!this._auth.LoggedIn){
@@ -31,27 +34,40 @@ export class AddTrainComponent implements OnInit {
     // }
   }
 
-  onArrival(){
+  onArrival() {
     this.sourceDate = this.pipe.transform(this.train.sourceDepartureTime, 'YYYY-MM-dd hh:mm');
   }
 
-  onTotalSeat(){
-    this.train.availableGeneralSeat=0;
-    this.train.availableLadiesSeat=0;
+  onTotalSeat() {
+    this.train.availableGeneralSeat = 0;
+    this.train.availableLadiesSeat = 0;
   }
 
-  onGeneralSeat(){
-    if(this.train.availableGeneralSeat <= this.train.totalSeat && this.train.availableGeneralSeat>=0)
-      this.train.availableLadiesSeat=this.train.totalSeat-this.train.availableGeneralSeat;
+  onGeneralSeat() {
+    if (this.train.availableGeneralSeat <= this.train.totalSeat && this.train.availableGeneralSeat >= 0)
+      this.train.availableLadiesSeat = this.train.totalSeat - this.train.availableGeneralSeat;
   }
 
-  onSubmit(){
+  onSubmit() {
     this._service.addTrain(this.train).subscribe(
-      value=>{
-        console.log("Success");
+      value => {
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
+        this.message = "Train Updated Successfully";
+        this.classMsg = "alert-success";
+        setTimeout(() => { this._router.navigate(['Train/View']); }, 2000);
       },
-      error=>{
-        console.log("error");
+      error => {
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
+        this.message = error.error.msg;
+        this.classMsg = "alert-danger";
       }
     )
     console.log(this.train);

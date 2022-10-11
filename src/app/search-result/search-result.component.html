@@ -31,7 +31,10 @@
                         <td>{{result.availableLadiesSeat}}</td>
                         <td>{{result.seatFare}}</td>
                         <td>
-                            <a class="btn btn-sm btn-info text-white" (click)="onBook(result)">Book</a>
+                            <button class="btn btn-sm btn-info text-white" (click)="onBook(result)" [disabled]="result.availableGeneralSeat == 0 && result.availableLadiesSeat == 0">
+                                <span *ngIf="result.availableGeneralSeat == 0 && result.availableLadiesSeat == 0">Not Available</span>
+                                <span *ngIf="result.availableGeneralSeat != 0 || result.availableLadiesSeat != 0">Book</span>
+                            </button>
                         </td>
                     </tr>
                 </tbody>

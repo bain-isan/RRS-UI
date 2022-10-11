@@ -14,7 +14,8 @@ import { Stations } from '../shared/stations';
 export class SearchTrainComponent implements OnInit {
   pipe = new DatePipe('en-US');
   public startDate = this.pipe.transform(new Date(), 'YYYY-MM-dd');
-  
+  public message = "";
+  public classMsg = "";
   
   public stations:string[] = new Stations().station;
 
@@ -38,6 +39,14 @@ export class SearchTrainComponent implements OnInit {
         }
       },
       error => {
+        if(error.error.msg != undefined){
+          this.message = error.error.msg;
+          this.classMsg ="alert-danger";
+        }
+        if(error.error.detail){
+          this.message = error.error.detail;
+          this.classMsg ="alert-danger";
+        }
         console.log(error.error.msg);
       })
   }

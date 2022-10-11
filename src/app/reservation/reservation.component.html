@@ -59,6 +59,7 @@
 
     <div class="card  card-sizing">
         <div *ngFor="let passenger of passengers; let i= index">
+            <h3>Passenger {{i+1}}</h3>
             <div class="row spacing">
                 <div class="col">
                     <label for="name">Name</label>
@@ -115,8 +116,8 @@
             <hr>
         </div>
         <button type="button" name="Add" class="btn btn-info" (click)="onAddPassenger()"
-            [disabled]="reservation.QuotaName == ''">+Add Passenger</button>
-
+            [disabled]="reservation.QuotaName == '' || canAddPassengerDisabled()">+Add Passenger</button>
+       <span class="text-danger">{{message}}</span>
     </div>
     <button type="submit" class="btn btn-primary form-control card-sizing"
         [disabled]="form.invalid || form.untouched">Book Now</button>

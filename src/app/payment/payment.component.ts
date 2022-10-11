@@ -15,16 +15,19 @@ import { Transaction } from '../shared/transaction';
 })
 export class PaymentComponent implements OnInit {
   num?:any;
-  public classMsg = "";
   public payable = 0;
   public years= [2022];
   public months = [1,2,3,4,5,6,7,8,9,10,11,12];
   public totalFare = 0;
+  public message = "";
+  public classMsg = "";
+
   public transaction = new Transaction('',this.num,this.num,this.num,'');
   public passengers:PassengerDto[] = [];
   public passengerTic:PassengerTicket[] = [];
   public reservation = new ReservationDto(this.num,'',this.passengers, this.transaction);
   public ticket = new Ticket(this.num,'',this.num,this.num,'','',this.num,this.num,this.num,this.num,'','',this.passengerTic);
+
   constructor(
     private _auth:AuthenticateService,
     private _service:TransactionService, 
@@ -61,12 +64,24 @@ export class PaymentComponent implements OnInit {
     console.log(this.reservation);
     this._service.postReservation(this.reservation).subscribe(
       value =>{
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
         this.ticket = value;
-        this._router.navigate(['Ticket/View'], {queryParams:{data:JSON.stringify(this.ticket)}})
-        console.log(value);
+        this.message = "Payment Successfull";
+        this.classMsg = "alert-success";
+        setTimeout(()=>{this._router.navigate(['Ticket/View'], {queryParams:{data:JSON.stringify(this.ticket)}})}, 2500);
       },
       error =>{
-        console.log(error);
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
+        this.message = error.error.msg + "<br> Payment Cancelled";
+        this.classMsg = "alert-danger";
       }
     )
   }

@@ -10,7 +10,7 @@ import { TrainDtoPut } from '../shared/train-dto-put';
   styleUrls: ['./train-list.component.css']
 })
 export class TrainListComponent implements OnInit {
-
+  public message = "";
   constructor(
     public _service:TrainListService, 
     private _router:Router,
@@ -26,10 +26,11 @@ export class TrainListComponent implements OnInit {
     
     this._service.getAllTrains().subscribe(
       values =>{
+        this.message = "";
         this.allTrains = values;
       },
       error =>{
-        console.log(error);
+        this.message = error.error.msg;
       }
     );
   }

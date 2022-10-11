@@ -19,6 +19,10 @@ export class UpdateTrainComponent implements OnInit {
   public stations:string[] = new Stations().station;
   public train = new TrainDtoPut(this.num,this.num,'','','',this.num,this.num,this.num,this.num,this.num,this.num);
   public sourceDate:any;
+  public message = "";
+  
+  public classMsg = "";
+
 
   constructor(
     private _service:UpdateTrainService, 
@@ -47,11 +51,6 @@ export class UpdateTrainComponent implements OnInit {
     this.sourceDate = this.pipe.transform(this.train.sourceDepartureTime, 'YYYY-MM-dd hh:mm');
   }
 
-  onTotalSeat(){
-    this.train.availableGeneralSeat=0;
-    this.train.availableLadiesSeat=0;
-  }
-
   onGeneralSeat(){
     this.train.availableLadiesSeat=this.train.totalSeat-this.train.availableGeneralSeat;
   }
@@ -59,10 +58,24 @@ export class UpdateTrainComponent implements OnInit {
   onSubmit(){
     this._service.update(this.train).subscribe(
       value=>{
-        //Show Successfully Added Msg
+        window.scroll({ 
+          top: 0, 
+          left: 0, 
+          behavior: 'smooth' 
+   });
+        this.message = "Train Updated Successfully";
+        this.classMsg = "alert-success";
+        setTimeout(()=>{ this._router.navigate(['Train/View']); }, 2000);
+        console.log(value);
       },
       error=>{
-
+        window.scroll({ 
+          top: 0, 
+          left: 0, 
+          behavior: 'smooth' 
+   });
+        this.message = error.error.msg;
+        this.classMsg = "alert-danger";
       }
     )
     console.log(this.train);

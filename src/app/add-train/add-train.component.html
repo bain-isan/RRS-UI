@@ -1,6 +1,7 @@
 <div class="main">
 
     <div class="card card-size ">
+        <div class="alert {{classMsg}} alert-spacing" role="alert">{{message}}</div>
         <h2 class="text-center spacing-left">ADD TRAIN</h2>
         <form #form="ngForm" (ngSubmit)="onSubmit()">
             <div class="form-group  spacing">
@@ -22,8 +23,8 @@
             <div class="form-group spacing">
                 <label class="form-label">Source Station : </label>
                 <select class="form-select" placeholder="From" name="From" #source="ngModel"
-                    [(ngModel)]="train.sourceStation" [class.is-invalid]="source.invalid && source.touched" required>
-                    <option *ngFor="let station of stations" [value]="station">{{station}}</option>
+                    [(ngModel)]="train.sourceStation" [class.is-invalid]="source.invalid && source.touched"  required>
+                    <option *ngFor="let station of stations" [value]="station" [disabled]="train.destinationStation==station">{{station}}</option>
                 </select>
                 <small class="text-danger" [class.d-none]="source.valid || source.untouched">Mandatory and Must be Selected</small>
             </div>
@@ -32,7 +33,7 @@
                 <label class="form-label">Destination Station : </label>
                 <select class="form-select" placeholder="To" name="To" #destination="ngModel" [(ngModel)]="train.destinationStation"
                 [class.is-invalid]="destination.invalid && destination.touched" required>
-                    <option *ngFor="let station of stations" [value]="station">{{station}}</option>
+                    <option *ngFor="let station of stations" [value]="station" [disabled]="train.sourceStation==station">{{station}}</option>
                 </select>
                 <small class="text-danger" [class.d-none]="destination.valid || destination.untouched">Mandatory and Must be Selected</small>
             </div>

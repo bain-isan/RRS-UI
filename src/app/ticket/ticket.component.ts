@@ -16,7 +16,9 @@ export class TicketComponent implements OnInit {
   num?:any;
   public passengers:PassengerTicket[] = [];
   public ticket = new Ticket(this.num,'',this.num,this.num,'','',this.num,this.num,this.num,this.num,'','',this.passengers);
-  
+  public message = "";
+  public classMsg = "";
+
   constructor(
     private _service:TicketService, 
     private _router:Router,
@@ -31,11 +33,12 @@ export class TicketComponent implements OnInit {
  onSubmit(){
   this._service.getTicket(this.pnrNumber).subscribe(
     value=>{
-      this.ticket = value;
-      
+      this.ticket = value;      
       this._router.navigate(['Ticket/View'], {queryParams:{data:JSON.stringify(this.ticket)}})
     },
     error=>{
+      this.message = error.error.msg;
+      this.classMsg = "alert-danger"
       console.log(error.error.msg);
     }
     

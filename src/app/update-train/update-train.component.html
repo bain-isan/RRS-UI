@@ -1,6 +1,7 @@
 <div class="main">
     
     <div class="card card-size ">
+        <div class="alert {{classMsg}} alert-spacing" role="alert">{{message}}</div>
         <h2 class="text-center spacing-left">UPDATE TRAIN</h2>
         <form #form="ngForm" (ngSubmit)="onSubmit()">
             <div class="form-group  spacing">
@@ -23,7 +24,7 @@
                 <label class="form-label">Source Station : </label>
                 <select class="form-select" placeholder="From" name="From" #source="ngModel"
                     [(ngModel)]="train.sourceStation" [class.is-invalid]="source.invalid && source.touched" required>
-                    <option *ngFor="let station of stations" [value]="station" [selected]="station == train.sourceStation">{{station}}</option>
+                    <option *ngFor="let station of stations" [value]="station" [selected]="station == train.sourceStation" [disabled]="train.destinationStation==station">{{station}}</option>
                 </select>
 
             </div>
@@ -32,7 +33,7 @@
                 <label class="form-label">Destination Station : </label>
                 <select class="form-select" placeholder="To" name="To" #destination="ngModel" [(ngModel)]="train.destinationStation"
                 [class.is-invalid]="destination.invalid && destination.touched" required>
-                    <option *ngFor="let station of stations" [value]="station" [selected]="station == train.destinationStation">{{station}}</option>
+                    <option *ngFor="let station of stations" [value]="station" [selected]="station == train.destinationStation" [disabled]="train.sourceStation==station">{{station}}</option>
                 </select>
             </div>
 
@@ -48,7 +49,7 @@
             <div class="form-group  spacing">
                 <label class="form-label" for="lname">Departure date:</label>
                 <input class="form-control" type="datetime-local" name="departure"  min="{{sourceDate}}" placeholder="Enter Date" 
-                [(ngModel)]="train.destinationArrivalTime" #departure="ngModel"  [disabled]="train.sourceDepartureTime == undefined" (change)="onTotalSeat()"
+                [(ngModel)]="train.destinationArrivalTime" #departure="ngModel"  [disabled]="train.sourceDepartureTime == undefined"
                 [class.is-invalid]="departure.invalid && departure.touched" required/>
 
                 <small class="text-danger" [class.d-none]="departure.valid || departure.untouched">Mandatory and Must be Selected</small>

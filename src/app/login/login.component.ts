@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("jwt", value.jwt);
           localStorage.setItem("role", value.role);
           this.classMsg = "alert-success";
-          delay(100);
-          this._router.navigate(['/']);
+          setTimeout(()=>{ this._router.navigate(['/']); }, 2000)
+          
           
       },
       error => {

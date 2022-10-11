@@ -1,6 +1,7 @@
 <div class="main">
 
     <div class="card card-size">
+        <div class="alert {{classMsg}} alert-spacing" role="alert">{{message}}</div>
         <h1 class="text-centre spacing">Get Ticket</h1>
         <div>
             <form #form="ngForm" (ngSubmit)="onSubmit()">

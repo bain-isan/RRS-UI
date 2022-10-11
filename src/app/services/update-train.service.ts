@@ -10,6 +10,6 @@ export class UpdateTrainService {
   constructor(private _http:HttpClient) { }
 
   update(train:TrainDtoPut){
-    return this._http.put<TrainDtoPut>(this._baseUrl,train);
+    return this._http.put(this._baseUrl,train);
   }
 }
