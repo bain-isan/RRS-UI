@@ -11,7 +11,11 @@ import { LoginService } from './services/login.service';
 export class AppComponent implements OnInit {
   title = 'RailwayReservationSystem';
   public isLoggedIn = false;
-  constructor(private _router: Router, public _auth: AuthenticateService, private _logout: LoginService) { }
+  constructor(
+    private _router: Router, 
+    public _auth: AuthenticateService, 
+    private _logout: LoginService
+    ) { }
 
   ngOnInit(): void {
     this.check();
