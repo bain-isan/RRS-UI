@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group  spacing">
-                <label class="form-label" for="lname">Arrival Date:</label>
+                <label class="form-label" for="lname">Source Departure Time:</label>
                 <input class="form-control" type="datetime-local" name="arrival" min="{{startDate}}"  placeholder="Enter Date" 
                 [(ngModel)]="train.sourceDepartureTime" #arrival="ngModel" (change)="onArrival()" 
                 [class.is-invalid]="arrival.invalid && arrival.touched" required/>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="form-group  spacing">
-                <label class="form-label" for="lname">Departure date:</label>
+                <label class="form-label" for="lname">Destination Arrival Time:</label>
                 <input class="form-control" type="datetime-local" name="departure"  min="{{sourceDate}}" placeholder="Enter Date" 
                 [(ngModel)]="train.destinationArrivalTime" #departure="ngModel"  [disabled]="train.sourceDepartureTime == undefined" (change)="onTotalSeat()"
                 [class.is-invalid]="departure.invalid && departure.touched" required/>
