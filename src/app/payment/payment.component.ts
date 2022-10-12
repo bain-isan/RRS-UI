@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticateService } from '../services/authenticate.service';
+import { TrainListService } from '../services/train-list.service';
 import { TransactionService } from '../services/transaction.service';
 import { PassengerDto } from '../shared/passenger-dto';
 import { PassengerTicket } from '../shared/passenger-ticket';
 import { ReservationDto } from '../shared/reservation-dto';
 import { ReservationNoTran } from '../shared/reservation-no-tran';
 import { Ticket } from '../shared/ticket';
+import { Train } from '../shared/train';
 import { Transaction } from '../shared/transaction';
 
 @Component({
@@ -28,23 +30,35 @@ export class PaymentComponent implements OnInit {
   public passengerTic:PassengerTicket[] = [];
   public reservation = new ReservationDto(this.num,'',this.passengers, this.transaction);
   public ticket = new Ticket(this.num,'',this.num,this.num,'','',this.num,this.num,this.num,this.num,'','',this.passengerTic);
-  
+  //public train = new Train(this.num, '', '', '', this.num, this.num, this.num, this.num, this.num, this.num);
+
   public searchResult?: any;
   public reservationNT = new ReservationNoTran(this.num, '', this.passengers);
   constructor(
     private _auth:AuthenticateService,
     private _service:TransactionService, 
     private _router: Router,
-    private _acRouter: ActivatedRoute
+    private _acRouter: ActivatedRoute,
+    private _train: TrainListService
   ) { }
 
   ngOnInit(): void {
-    
+
     let res = this._service.getReservation();
     if(res != undefined){
       this.reservation.TrainId = res.TrainId;
       this.reservation.QuotaName = res.QuotaName;
       this.reservation.Passengers = res.Passengers;
+
+      let tr = this._train.getTrainById(this.reservation.TrainId).subscribe(
+        value =>{
+          this.totalFare = this.reservation.Passengers.length * value.seatFare;
+        },
+        error =>{
+          this._router.navigate(['Train/Search']);
+        }
+      );
+
     }
     else{
       this._router.navigate(['Train/Search']);

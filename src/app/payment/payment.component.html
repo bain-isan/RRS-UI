@@ -3,7 +3,7 @@
   <div class="card " style="width:30rem">
     <div class="alert {{classMsg}} alert-spacing" role="alert">{{message}}</div>
     <div class="text-centre spacing">
-      <h1 class="display-5">Payment</h1>
+      <h2>Payment: {{totalFare | currency:'PKR'}}</h2>
     </div>
     <form novalidate #form="ngForm" (ngSubmit)="onSubmit()">
 

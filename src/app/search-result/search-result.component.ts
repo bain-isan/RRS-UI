@@ -44,4 +44,9 @@ export class SearchResultComponent implements OnInit {
   LoggedIn(){
     return this._auth.LoggedIn;
   }
+
+  ngOnDestroy(): void {    
+    window.history.pushState(null, '', 'Train/Search');
+    
+  }
 }

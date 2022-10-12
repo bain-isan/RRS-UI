@@ -31,15 +31,25 @@ export class RegisterComponent implements OnInit {
     this.classMsg = '';
     this._service.userRegister(this.register).subscribe(
       value => {
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
         this.classMsg = "alert-success";
         this.message = 'Your UserId: ' + value.userId;
-        this._router.navigate(['Login']);
+        setTimeout(()=>{this._router.navigate(['Login'])},2500);
       },
       error => {
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
         this.classMsg = "alert-danger";
-        if (error.error.msg != '')
+        if (error.error.msg != undefined)
           this.message = error.error.msg;
-        if (error.error.detail != '')
+        if (error.error.detail != undefined)
           this.message = error.error.detail;
         
         console.log(error);

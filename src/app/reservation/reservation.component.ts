@@ -124,6 +124,9 @@ export class ReservationComponent implements OnInit {
     // console.log(this.reservation);
   }
 
-
+  ngOnDestroy(): void {    
+    window.history.pushState(null, '', 'Train/Search');
+    
+  }
 
 }
