@@ -15,7 +15,7 @@
                         <th scope="col">General Seat Available</th>
                         <th scope="col">Ladies Seat Available</th>
                         <th scope="col">Fare(Rs)</th>
-                        <th scope="col">Book</th>
+                        <th scope="col" *ngIf="roleUser() || !LoggedIn()">Book</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +35,10 @@
                                 <span *ngIf="result.availableGeneralSeat == 0 && result.availableLadiesSeat == 0">Not Available</span>
                                 <span *ngIf="result.availableGeneralSeat != 0 || result.availableLadiesSeat != 0">Book</span>
                             </button>
+
+                            <div class="text-danger" disabled *ngIf="!LoggedIn()">
+                                Log In First
+                            </div>
                         </td>
                     </tr>
                 </tbody>

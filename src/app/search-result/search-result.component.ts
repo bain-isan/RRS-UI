@@ -41,4 +41,7 @@ export class SearchResultComponent implements OnInit {
   roleUser(){
     return localStorage.getItem('role') == 'User';
   }
+  LoggedIn(){
+    return this._auth.LoggedIn;
+  }
 }
