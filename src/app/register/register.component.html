@@ -22,8 +22,8 @@
                 <div class="col no-bootstrap-spacing ">
                     <div class="form-group spacing-right">
                         <label class="form-label" for="fname">Dob:</label>
-                        <input class="form-control" type="date" name="Dob" max="{{today}}"required [(ngModel)]="register.Dob" #dob="ngModel"
-                        [class.is-invalid]="dob.invalid && dob.touched">
+                        <input class="form-control" type="date" name="Dob" max="{{maxDate}}"required [(ngModel)]="register.Dob" #dob="ngModel"
+                        [class.is-invalid]="dob.invalid && dob.touched && !checkAdult()" onkeydown="return false">
                         <small class="text-danger" [class.d-none]="dob.valid || dob.untouched">Mandatory and Must be a valid DoB</small>
                     </div>
                 </div>

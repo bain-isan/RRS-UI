@@ -4,90 +4,138 @@
         <div class="alert {{classMsg}} alert-spacing" role="alert">{{message}}</div>
         <h2 class="text-center spacing-left">ADD TRAIN</h2>
         <form #form="ngForm" (ngSubmit)="onSubmit()">
-            <div class="form-group  spacing">
-                <label class="form-label" for="lname">Train Number:</label>
-                <input class="form-control" type="number" name="number" placeholder="Enter Number" [(ngModel)]="train.trainNo" #number="ngModel"
-                pattern="[0-9]*" [class.is-invalid]="number.invalid && number.touched" required/>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group  spacing">
+                        <label class="form-label" for="lname">Train Number:</label>
+                        <input class="form-control" type="number" name="number" placeholder="Enter Number"
+                            [(ngModel)]="train.trainNo" #number="ngModel" pattern="[0-9]*"
+                            [class.is-invalid]="number.invalid && number.touched" required />
 
-                <small class="text-danger" [class.d-none]="number.valid || number.untouched">Mandatory and Must be a valid Number</small>
+                        <small class="text-danger" [class.d-none]="number.valid || number.untouched">Mandatory and Must
+                            be a valid Number</small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group  spacing">
+                        <label class="form-label" for="lname">Train Name:</label>
+                        <input class="form-control" type="text" name="name" placeholder="Enter Name"
+                            [(ngModel)]="train.trainName" #name="ngModel" pattern="[a-zA-Z ]*"
+                            [class.is-invalid]="name.invalid && name.touched" required />
+
+                        <small class="text-danger" [class.d-none]="name.valid || name.untouched">Mandatory and Must be a
+                            valid Name</small>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group  spacing">
-                <label class="form-label" for="lname">Train Name:</label>
-                <input class="form-control" type="text" name="name" placeholder="Enter Name" [(ngModel)]="train.trainName" #name="ngModel"
-                pattern="[a-zA-Z ]*" [class.is-invalid]="name.invalid && name.touched" required/>
-
-                <small class="text-danger" [class.d-none]="name.valid || name.untouched">Mandatory and Must be a valid Name</small>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group spacing">
+                        <label class="form-label">Source Station : </label>
+                        <select class="form-select" placeholder="From" name="From" #source="ngModel"
+                            [(ngModel)]="train.sourceStation" [class.is-invalid]="source.invalid && source.touched"
+                            required>
+                            <option *ngFor="let station of stations" [value]="station"
+                                [disabled]="train.destinationStation==station">{{station}}</option>
+                        </select>
+                        <small class="text-danger" [class.d-none]="source.valid || source.untouched">Mandatory and Must
+                            be Selected</small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group spacing">
+                        <label class="form-label">Destination Station : </label>
+                        <select class="form-select" placeholder="To" name="To" #destination="ngModel"
+                            [(ngModel)]="train.destinationStation"
+                            [class.is-invalid]="destination.invalid && destination.touched" required>
+                            <option *ngFor="let station of stations" [value]="station"
+                                [disabled]="train.sourceStation==station">{{station}}</option>
+                        </select>
+                        <small class="text-danger" [class.d-none]="destination.valid || destination.untouched">Mandatory
+                            and Must be Selected</small>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group spacing">
-                <label class="form-label">Source Station : </label>
-                <select class="form-select" placeholder="From" name="From" #source="ngModel"
-                    [(ngModel)]="train.sourceStation" [class.is-invalid]="source.invalid && source.touched"  required>
-                    <option *ngFor="let station of stations" [value]="station" [disabled]="train.destinationStation==station">{{station}}</option>
-                </select>
-                <small class="text-danger" [class.d-none]="source.valid || source.untouched">Mandatory and Must be Selected</small>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group  spacing">
+                        <label class="form-label" for="lname">Source Departure Time:</label>
+                        <input class="form-control" type="datetime-local" name="arrival" min="{{startDate}}"
+                            placeholder="Enter Date" [(ngModel)]="train.sourceDepartureTime" #arrival="ngModel"
+                            (change)="onArrival()" [class.is-invalid]="arrival.invalid && arrival.touched" required />
+
+                        <small class="text-danger" [class.d-none]="arrival.valid || arrival.untouched">Mandatory and
+                            Must be Selected</small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group  spacing">
+                        <label class="form-label" for="lname">Destination Arrival Time:</label>
+                        <input class="form-control" type="datetime-local" name="departure" min="{{sourceDate}}"
+                            placeholder="Enter Date" [(ngModel)]="train.destinationArrivalTime" #departure="ngModel"
+                            [disabled]="train.sourceDepartureTime == undefined" (change)="onTotalSeat()"
+                            [class.is-invalid]="departure.invalid && departure.touched" required />
+
+                        <small class="text-danger" [class.d-none]="departure.valid || departure.untouched">Mandatory and
+                            Must be Selected</small>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group spacing">
-                <label class="form-label">Destination Station : </label>
-                <select class="form-select" placeholder="To" name="To" #destination="ngModel" [(ngModel)]="train.destinationStation"
-                [class.is-invalid]="destination.invalid && destination.touched" required>
-                    <option *ngFor="let station of stations" [value]="station" [disabled]="train.sourceStation==station">{{station}}</option>
-                </select>
-                <small class="text-danger" [class.d-none]="destination.valid || destination.untouched">Mandatory and Must be Selected</small>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group spacing">
+                        <label class="form-label" for="lname">Total Seats:</label>
+                        <input class="form-control" type="number" name="seats" placeholder="Enter Seat" min="50"
+                            [(ngModel)]="train.totalSeat" #seat="ngModel" (change)="onTotalSeat()"
+                            [class.is-invalid]="seat.invalid && seat.touched" required />
+
+                        <small class="text-danger" [class.d-none]="seat.valid || seat.untouched">Mandatory and Must be
+                            Valid Number and Must be Greater than 50</small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group spacing">
+                        <label class="form-label" for="lname">Seat Fare:</label>
+                        <input class="form-control" type="number" name="fare" placeholder="Enter Fare"
+                            [(ngModel)]="train.seatFare" #fare="ngModel"
+                            [class.is-invalid]="fare.invalid && fare.touched" required />
+
+                        <small class="text-danger" [class.d-none]="fare.valid || fare.untouched">Mandatory and Must be
+                            Valid Number</small>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group  spacing">
-                <label class="form-label" for="lname">Source Departure Time:</label>
-                <input class="form-control" type="datetime-local" name="arrival" min="{{startDate}}"  placeholder="Enter Date" 
-                [(ngModel)]="train.sourceDepartureTime" #arrival="ngModel" (change)="onArrival()" 
-                [class.is-invalid]="arrival.invalid && arrival.touched" required/>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group spacing">
+                        <label class="form-label" for="lname"> AvailableGeneral Seat:</label>
+                        <input class="form-control" type="number" name="general" min="0" max="{{train.totalSeat}}"
+                            placeholder="Enter General Seat" [(ngModel)]="train.availableGeneralSeat" #general="ngModel"
+                            [disabled]="train.totalSeat == undefined || train.totalSeat < 50" (change)="onGeneralSeat()"
+                            [class.is-invalid]="general.invalid && general.touched" required />
 
-                <small class="text-danger" [class.d-none]="arrival.valid || arrival.untouched">Mandatory and Must be Selected</small>
+                        <small class="text-danger" [class.d-none]="general.valid || general.untouched">Mandatory and
+                            Must be Valid Numberand Less than or same as Total Seat</small>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group spacing">
+                        <label class="form-label" for="lname">Available Ladies Seat:</label>
+                        <input class="form-control" type="number" name="ladies" min="0" max="{{train.totalSeat}}"
+                            placeholder="Enter Ladies Seat" [(ngModel)]="train.availableLadiesSeat" #ladies="ngModel"
+                            disabled required />
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group  spacing">
-                <label class="form-label" for="lname">Destination Arrival Time:</label>
-                <input class="form-control" type="datetime-local" name="departure"  min="{{sourceDate}}" placeholder="Enter Date" 
-                [(ngModel)]="train.destinationArrivalTime" #departure="ngModel"  [disabled]="train.sourceDepartureTime == undefined" (change)="onTotalSeat()"
-                [class.is-invalid]="departure.invalid && departure.touched" required/>
 
-                <small class="text-danger" [class.d-none]="departure.valid || departure.untouched">Mandatory and Must be Selected</small>
-            </div>
-
-            <div class="form-group spacing">
-                <label class="form-label" for="lname">Total Seats:</label>
-                <input class="form-control" type="number" name="seats"  placeholder="Enter Seat" min="50" [(ngModel)]="train.totalSeat" #seat="ngModel" (change)="onTotalSeat()"
-                [class.is-invalid]="seat.invalid && seat.touched" required/>
-
-                <small class="text-danger" [class.d-none]="seat.valid || seat.untouched">Mandatory and Must be Valid Number and Must be Greater than 50</small>
-            </div>
-
-            <div class="form-group spacing">
-                <label class="form-label" for="lname"> AvailableGeneral Seat:</label>
-                <input class="form-control" type="number" name="general" min="0" max="{{train.totalSeat}}" placeholder="Enter General Seat" [(ngModel)]="train.availableGeneralSeat" 
-                #general="ngModel" [disabled]="train.totalSeat == undefined || train.totalSeat < 50" (change)="onGeneralSeat()" 
-                [class.is-invalid]="general.invalid && general.touched" required/>
-
-                <small class="text-danger" [class.d-none]="general.valid || general.untouched">Mandatory and Must be Valid Numberand Less than or same as Total Seat</small>
-            </div>
-
-            <div class="form-group spacing">
-                <label class="form-label" for="lname">Available Ladies Seat:</label>
-                <input class="form-control" type="number" name="ladies" min="0" max="{{train.totalSeat}}" placeholder="Enter Ladies Seat" [(ngModel)]="train.availableLadiesSeat" #ladies="ngModel" disabled
-                required/>
-            </div>
-
-            <div class="form-group spacing">
-                <label class="form-label" for="lname">Seat Fare:</label>
-                <input class="form-control" type="number" name="fare" placeholder="Enter Fare" [(ngModel)]="train.seatFare" #fare="ngModel"
-                [class.is-invalid]="fare.invalid && fare.touched" required/>
-
-                <small class="text-danger" [class.d-none]="fare.valid || fare.untouched">Mandatory and Must be Valid Number</small>
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-lg form-control" [disabled]="form.invalid || form.untouched"><b>ADD TRAIN</b></button>
+            <button type="submit" class="btn btn-primary btn-lg form-control"
+                [disabled]="form.invalid || form.untouched"><b>ADD
+                    TRAIN</b></button>
         </form>
     </div>
 </div>

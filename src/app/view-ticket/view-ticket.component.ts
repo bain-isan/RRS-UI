@@ -71,6 +71,37 @@ export class ViewTicketComponent implements OnInit {
     window.print();
   }
 
+  check() {
+    return this._auth.LoggedIn;
+  }
+
+  getRole(role: string) {
+    this._auth.getRole([role]);
+  }
+
+  checkAdmin() {
+    let role = this._auth.Role;
+    if (role != null) {
+      return this.check() && role == 'Admin' ? true : false;
+    }
+    return false;
+  }
+
+  checkUser() {
+    let role = this._auth.Role;
+    if (role != null) {
+      return this.check() && role == 'User' ? true : false;
+    }
+    return false;
+  }
+
+  checkCancelled(){
+    if(this.ticket.status == 'Cancelled'){
+      return true;
+    }
+    return false;
+  }
+
   ngOnDestroy(): void { 
      
     // window.history.replaceState(null, '', 'Train/Search');

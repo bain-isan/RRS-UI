@@ -1,5 +1,5 @@
 .main{
-    min-height: 190vh;
+    min-height: 170vh;
     background-image: url("../../assets/images/login-bg.jpg") ;
     background-position: center;
     background-repeat: no-repeat;
@@ -15,7 +15,7 @@
 }
  
 .card-size{
-    width: 500px;
+    width: 600px;
     position: relative;
     left: 4rem;
     top: 4rem;

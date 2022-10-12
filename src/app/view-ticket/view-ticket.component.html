@@ -48,6 +48,6 @@
 </div>
 <div class="text-center print-ticket">
     <button class="btn btn-primary btn-lg "  (click)="printThisPage()">Print</button>
-    <button class="btn btn-danger btn-lg"  (click)="cancel()">Cancel</button>
+    <button class="btn btn-danger btn-lg" *ngIf="checkUser()" [disabled]="checkCancelled()" (click)="cancel()">Cancel</button>
 </div>
 

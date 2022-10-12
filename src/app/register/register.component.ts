@@ -12,7 +12,7 @@ import { Register } from '../shared/register';
 })
 export class RegisterComponent implements OnInit {
   pipe = new DatePipe('en-US');
-  public today = this.pipe.transform(new Date(), 'YYYY-MM-dd');
+  public maxDate?:any;
   public classMsg = "";
   public message = '';
   date?: any;
@@ -25,6 +25,10 @@ export class RegisterComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+
+    let yr = new Date().getFullYear() - 18;
+    let preDate = new Date().setFullYear(yr);
+    this.maxDate = this.pipe.transform(preDate, 'YYYY-MM-dd');
   }
   onSubmit() {
     this.message = '';
@@ -55,6 +59,13 @@ export class RegisterComponent implements OnInit {
         console.log(error);
       }
     )
+  }
+
+  checkAdult(){
+    if(this.register.Dob < this.maxDate){
+      return true;
+    }
+    return false;
   }
 
 }

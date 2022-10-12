@@ -26,10 +26,10 @@
               <a class="nav-link active" *ngIf="checkAdmin()" href="Train/View">View All Train</a>
             </li>
             <li class="nav-item" >
-              <a class="nav-link active" *ngIf="checkUser() || checkAdmin()" href="Ticket/Search">Search Ticket</a>
+              <a class="nav-link active" *ngIf="checkUser() || checkUser()" href="Ticket/Search">Search / Cancel Ticket</a>
             </li>
-            <li class="nav-item" *ngIf="checkUser()">
-              <a class="nav-link active" href="Ticket/Search">Cancellation</a>
+            <li class="nav-item" *ngIf="checkAdmin()">
+              <a class="nav-link active" href="Ticket/Search">Search Ticket</a>
             </li>
           </ul>
         </div>
