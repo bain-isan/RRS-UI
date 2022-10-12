@@ -7,7 +7,7 @@
         <!-- UserId input -->
         <div class="form-group spacing">
             <label class="form-label" for="userId" >UserId </label>
-            <input type="text" class="form-control" name="UserId"  id="userId" required [(ngModel)] = "login.UserId" #user="ngModel" [class.is-invalid]='user.invalid && user.touched' placeholder="Eg. 123456"/>
+            <input type="number" class="form-control" name="UserId"  id="userId" required [(ngModel)] = "login.UserId" #user="ngModel" [class.is-invalid]='user.invalid && user.touched' placeholder="Eg. 123456"/>
             <small class="text-danger" [class.d-none]="user.valid || user.untouched">UserId Field is Mandatory</small>
         </div>
         
