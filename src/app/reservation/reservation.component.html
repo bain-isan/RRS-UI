@@ -102,9 +102,10 @@
                         <label for="age">Age</label>
                         <input type="number" name="age{{i}}" class="form-control" id="age" placeholder="Eg. 22" required
                             [(ngModel)]="passenger.Age" #age="ngModel" required
-                            [class.is-invalid]="age.invalid && age.touched" [disabled]="reservation.QuotaName == ''">
+                            min="0" max="150"
+                            [class.is-invalid]="age.invalid && age.touched " [disabled]="reservation.QuotaName == ''">
                         <small class="text-danger" [class.d-none]="age.valid || age.untouched">Age is mandatory and
-                            Must be selected</small>
+                            Must be filled properly<br>Age must be between 0 and 150</small>
                     </div>
                     <div class="col" [class.d-none]="i == 0">
                         <label>Remove</label>
